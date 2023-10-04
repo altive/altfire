@@ -92,6 +92,8 @@
 	"dart.flutterGenerateLocalizationsOnSave": "all",
 	// Specify the path to the Flutter SDK you are using.
 	"dart.flutterSdkPath": ".fvm/flutter_sdk",
+	// Specify the path to the Dart SDK you are using.
+	"dart.sdkPath": ".fvm/flutter_sdk/bin/cache/dart-sdk",
 	// Mark external packages as debuggable and enable stepping into them during debugging if `true`.
 	"dart.debugExternalPackageLibraries": false,
 	// Mark Dart SDK libraries as debuggable and enable stepping into them during debugging if `true`.
