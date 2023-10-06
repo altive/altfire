@@ -4,3 +4,72 @@ sdkPath: .fvm/flutter_sdk
 
 packages:
   - packages/*
+
+command:
+  bootstrap:
+    runPubGetInParallel: true
+  clean:
+    hooks:
+      post: |
+        melos exec --flutter -- "flutter clean"
+  version:
+    branch: main
+
+scripts:
+  upgrade:
+    run: |
+      melos exec -- \
+        "flutter pub upgrade --major-versions && flutter pub upgrade"
+    description: Run upgrade the major version of the pub.
+    packageFilters:
+      flutter: true
+      dirExists: lib
+
+  analyze:
+    run: |
+      melos exec -- \
+        flutter analyze . --fatal-infos
+    description: Run analyze.
+    packageFilters:
+      flutter: true
+      dirExists: lib
+
+  format:
+    run: |
+      melos exec -- \
+        dart format lib/
+    description: Run dart format.
+    packageFilters:
+      dirExists: lib
+
+  format:ci:
+    run: |
+      melos exec -- \
+        dart format --set-exit-if-changed lib/
+    description: Run dart format for CI.
+    packageFilters:
+      dirExists: lib
+
+  fix:
+    run: |
+      melos exec -- \
+        dart fix --apply lib
+    description: Run dart fix.
+    packageFilters:
+      dirExists: lib
+
+  test:
+    run: |
+      melos exec --fail-fast -- \
+        flutter test
+    description: Run flutter test.
+    packageFilters:
+      dirExists: test
+
+  test:ci:
+    run: |
+      melos exec --fail-fast -- \
+        flutter test --coverage
+    description: Run flutter test for CI.
+    packageFilters:
+      dirExists: test

@@ -1,6 +1,6 @@
 // Dart Recommended Settings: https://dartcode.org/docs/recommended-settings/
 {
-	// スペルチェックから除外する単語をまとめたテキストファイルを指定する
+	// Specify a text file that compiles words to be excluded from spell check.
 	"cSpell.customDictionaries": {
 		"app-words": {
 			"name": "app-words",
@@ -24,7 +24,7 @@
 			"scope": "workspace"
 		}
 	},
-	// スペルチェックを行わないファイルパスを指定する
+	// Specify a file path that will not undergo spell check.
 	"cSpell.ignorePaths": [
 		"dart_defines",
 		"firebase_options*.dart",
@@ -41,74 +41,74 @@
 		".vscode",
 		".vscode-insiders",
 	],
-	// ONLY GLOBAL: Breakpointに到達した時、デバッグビューが自動的に表示される
+	// ONLY GLOBAL: When reaching a Breakpoint, the debug view is automatically displayed.
 	"debug.openDebug": "openOnDebugBreak",
-	// 保存時にフォーマットを実行するなら`true`
+	// Execute format on save if true.
 	"editor.formatOnSave": true,
-	// 入力した行をフォーマットを実行するなら`true`
+	// Execute format on the line entered if `true`.
 	"editor.formatOnType": true,
-	// 貼り付けした時にフォーマットを実行するなら`true`
+	// Execute format when pasted if `true`.
 	"editor.formatOnPaste": true,
-	// 垂直ルーラーを表示する文字数の位置。複数指定可
+	// Position of the character count where the vertical ruler is displayed. Multiple specifications possible.
 	"editor.rulers": [
 		80
 	],
-	// ホワイトスペース文字の表示
+	// Display of whitespace characters.
 	"editor.renderWhitespace": "all",
-	// 制御文字を表示するなら`true`
+	// Display control characters if true.
 	"editor.renderControlCharacters": true,
-	// ミニマップを表示するなら`true`。Default: true
+	// Display the minimap if true. Default: true.
 	"editor.minimap.enabled": false,
-	// ブラケットをペアごとに色付けするなら`true`
+	// Color brackets by pair if `true`.
 	"editor.bracketPairColorization.enabled": true,
-	// ブラケットペアのガイド表示を有効にするなら`true`
+	// Enable bracket pair guide display if `true`.
 	"editor.guides.bracketPairs": true,
-	// Dartにのみ適用する設定群
+	// Settings applicable only to Dart.
 	"[dart]": {
-		// 選択された変数への正確な参照のみをハイライトするDartの機能を妨げないために`false`
+		// Set to `false` to not hinder the Dart feature that highlights only precise references to selected variables.
 		"editor.selectionHighlight": false,
-		// 「スニペットモード」でも通常通り補完機能を効かせるために`false`
+		// Set to `false` to allow regular completion functionality even in "snippet mode".
 		"editor.suggest.snippetsPreventQuickSuggestions": false,
-		// `first`: コード補完時に、最近使用された項目ではなく最上位の項目を提案する
-		// `recentlyUsedByPrefix`: 直前のテキストに基づいて最新使用された項目をフィルタリングする
+		// `first`: Propose the topmost item, not the recently used one, during code completion.
+		// `recentlyUsedByPrefix`: Filter the recently used items based on the preceding text.
 		"editor.suggestSelection": "recentlyUsedByPrefix",
-		// 補完リストが表示されていなくても、<TAB>を押すことで`for`などのスニペットを補完できる
+		// Even if the completion list is not displayed, pressing <TAB> will complete snippets like `for`.
 		"editor.tabCompletion": "onlySnippets",
-		// コメントや文字列の編集時にコード補完が単語を示唆することある挙動を無効化する
+		// Disable the behavior where code completion suggests words during editing of comments or strings.
 		"editor.wordBasedSuggestions": false,
-		// ファイル保存時に実行されるコードアクション
-		"editor.codeActionsOnSave": [
-			// セミコロンを挿入する。
-			"quickfix.insertSemicolon",
-			// インポートを整理する。
-			"source.organizeImports",
-			// 足りないインポートを追加する。
-			"source.addMissingImports",
-			// Dart fix を実行する。
-			"source.fixAll",
-			// セミコロンを挿入する。
-			"quickfix.insertSemicolon",
-		],
+		// Code actions executed upon file save.
+		"editor.codeActionsOnSave": {
+			// Insert a semicolon.
+			"quickfix.insertSemicolon": "always",
+			// Organize imports.
+			"source.organizeImports": "always",
+			// Add missing imports.
+			"source.addMissingImports": "always",
+			// Execute Dart fix.
+			"source.fixAll": "always",
+		},
 	},
-	// arbファイルが保存されるたびにLocalizationファイルを再生成させる
+	// Regenerate the Localization file every time an arb file is saved.
 	"dart.flutterGenerateLocalizationsOnSave": "all",
-	// 使用するFlutter SDKのパスを指定
+	// Specify the path to the Flutter SDK you are using.
 	"dart.flutterSdkPath": ".fvm/flutter_sdk",
-	// 外部パッケージをデバッグ可能としてマークし、デバッグ中のステップインを可能にするなら`true`
+	// Specify the path to the Dart SDK you are using.
+	"dart.sdkPath": ".fvm/flutter_sdk/bin/cache/dart-sdk",
+	// Mark external packages as debuggable and enable stepping into them during debugging if `true`.
 	"dart.debugExternalPackageLibraries": false,
-	// Dart SDKライブラリをデバッグ可能としてマークし、デバッグ中のステップインを可能にするなら`true`
+	// Mark Dart SDK libraries as debuggable and enable stepping into them during debugging if `true`.
 	"dart.debugSdkLibraries": false,
-	// 実験的な（未完成や不安定な可能性のある）リファクタを有効にするなら`true`
+	// Enable experimental refactoring (that might be unfinished or unstable) if `true`.
 	"dart.experimentalRefactors": true,
-	// スキップしたテストをテストツリーに表示させるなら`true`
+	// Display skipped tests in the test tree if `true`.
 	"dart.showSkippedTests": false,
-	// pubspec.yamlが保存されるたびにpub getするなら`always`
+	// Run `pub get` every time pubspec.yaml is saved if set to `always`.
 	"dart.runPubGetOnPubspecChanges": "always",
-	// クラス名を変更するとファイル名も自動で変更される。always, prompt, never
+	// When the class name is changed, the file name is also automatically changed. Options: always, prompt, never.
 	"dart.renameFilesWithClasses": "always",
-	// エクスプローラでファイルやフォルダをドラッグ＆ドロップした時に確認を求めるなら`true`
+	// Ask for confirmation when dragging and dropping files or folders in the Explorer if `true`.
 	"explorer.confirmDragAndDrop": false,
-	// Explorer上でファイルをグループ化しネスト表示させる
+	// Group and nest display files on the Explorer.
 	"explorer.fileNesting.enabled": true,
 	"explorer.fileNesting.expand": false,
 	"explorer.fileNesting.patterns": {
@@ -119,16 +119,16 @@
 		"readme.*": "authors, backers.md, changelog*, citation*, code_of_conduct.md, codeowners, contributing.md, contributors, copying, credits, governance.md, history.md, license*, maintainers, readme*, security.md, sponsors.md",
 		"*.dart": "$(capture).g.dart, $(capture).freezed.dart, $(capture).mocks.dart"
 	},
-	// 指定したファイルを監視から除外する
+	// Exclude specified files from monitoring.
 	"files.watcherExclude": {
 		"**/.fvm": true
 	},
-	// 現在のGitリポジトリのデフォルトリモートからコミットを自動で取得するなら`true`
-	// `all` に設定すると、全てのリモートから取得する
+	// Fetch commits automatically from the default remote of the current Git repository if `true`.
+	// When set to `all`, fetch from all remotes.
 	"git.autofetch": true,
-	// ステージングされた変更が無い場合に全ての変更をコミットさせる場合は`true`.
+	// Commit all changes when there are no staged changes if `true`.
 	"git.enableSmartCommit": true,
-	// 検索対象から生成ファイルを除外する
+	// Exclude generated files from the search targets.
 	"search.exclude": {
 		"**/.fvm": true,
 		"**/*.freezed.dart": true,

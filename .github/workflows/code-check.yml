@@ -1,0 +1,91 @@
+name: code check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      flutter: ${{ steps.filter.outputs.flutter }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Filter by paths
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            flutter:
+              - '**/android/**'
+              - '**/assets/**'
+              - '**/dart_defines/**'
+              - '**/golden_test/**'
+              - '**/ios/**'
+              - '**/lib/**'
+              - '**/test/**'
+              - '**/web/**'
+              - '**/analysis_options.yaml'
+              - '**/melos.yaml'
+              - '**/pubspec.yaml'
+              - 'fvm_config.json'
+
+  analyze:
+    needs: check
+    if: ${{ needs.check.outputs.flutter == 'true' && github.event_name != 'push' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        id: setup-flutter
+        uses: ./.github/actions/setup_flutter
+
+      - name: Prepare Melos
+        run: echo "MELOS_SDK_PATH=${{ steps.setup-flutter.outputs.flutter-path }}" >> "$GITHUB_ENV"
+
+      - name: Install Melos
+        uses: bluefireteam/melos-action@v2
+
+      - name: Analyze packages
+        run: melos run analyze --no-select
+
+      - name: Check for the existence of unformatted files
+        run: melos run format:ci --no-select
+
+  test:
+    needs: check
+    if: needs.check.outputs.flutter == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        id: setup-flutter
+        uses: ./.github/actions/setup_flutter
+
+      - name: Prepare Melos
+        run: echo "MELOS_SDK_PATH=${{ steps.setup-flutter.outputs.flutter-path }}" >> "$GITHUB_ENV"
+
+      - name: Install Melos
+        uses: bluefireteam/melos-action@v2
+
+      - name: Run package tests
+        run: melos run test:ci --no-select
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage/lcov.info
