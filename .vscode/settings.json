@@ -77,16 +77,16 @@
 		// Disable the behavior where code completion suggests words during editing of comments or strings.
 		"editor.wordBasedSuggestions": false,
 		// Code actions executed upon file save.
-		"editor.codeActionsOnSave": [
+		"editor.codeActionsOnSave": {
 			// Insert a semicolon.
-			"quickfix.insertSemicolon",
+			"quickfix.insertSemicolon": "always",
 			// Organize imports.
-			"source.organizeImports",
+			"source.organizeImports": "always",
 			// Add missing imports.
-			"source.addMissingImports",
+			"source.addMissingImports": "always",
 			// Execute Dart fix.
-			"source.fixAll",
-		],
+			"source.fixAll": "always",
+		},
 	},
 	// Regenerate the Localization file every time an arb file is saved.
 	"dart.flutterGenerateLocalizationsOnSave": "all",
