@@ -141,9 +141,6 @@ coverage/
 # Fastlane related
 **/fastlane/report.xml
 
-# FVM related
-**/.fvm/flutter_sdk
-
 # Bundler related
 **/vendor/bundle
 

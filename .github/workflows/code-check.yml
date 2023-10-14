@@ -37,7 +37,6 @@ jobs:
               - '**/analysis_options.yaml'
               - '**/melos.yaml'
               - '**/pubspec.yaml'
-              - 'fvm_config.json'
 
   analyze:
     needs: check
@@ -47,12 +46,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Flutter
-        id: setup-flutter
-        uses: ./.github/actions/setup_flutter
-
-      - name: Prepare Melos
-        run: echo "MELOS_SDK_PATH=${{ steps.setup-flutter.outputs.flutter-path }}" >> "$GITHUB_ENV"
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
 
       - name: Install Melos
         uses: bluefireteam/melos-action@v2
@@ -71,12 +68,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Flutter
-        id: setup-flutter
-        uses: ./.github/actions/setup_flutter
-
-      - name: Prepare Melos
-        run: echo "MELOS_SDK_PATH=${{ steps.setup-flutter.outputs.flutter-path }}" >> "$GITHUB_ENV"
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
 
       - name: Install Melos
         uses: bluefireteam/melos-action@v2

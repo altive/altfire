@@ -1,6 +1,5 @@
 name: flutterfire_adapter
 repository: https://github.com/altive/flutterfire_adapter
-sdkPath: .fvm/flutter_sdk
 
 packages:
   - packages/*
