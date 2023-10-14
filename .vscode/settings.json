@@ -35,7 +35,6 @@
 		"*.gen.dart",
 		"*.lock",
 		"*.xcconfig",
-		"**/fvm",
 		"**/.pub-cache",
 		".git/objects",
 		".vscode",
@@ -90,10 +89,6 @@
 	},
 	// Regenerate the Localization file every time an arb file is saved.
 	"dart.flutterGenerateLocalizationsOnSave": "all",
-	// Specify the path to the Flutter SDK you are using.
-	"dart.flutterSdkPath": ".fvm/flutter_sdk",
-	// Specify the path to the Dart SDK you are using.
-	"dart.sdkPath": ".fvm/flutter_sdk/bin/cache/dart-sdk",
 	// Mark external packages as debuggable and enable stepping into them during debugging if `true`.
 	"dart.debugExternalPackageLibraries": false,
 	// Mark Dart SDK libraries as debuggable and enable stepping into them during debugging if `true`.
@@ -119,10 +114,6 @@
 		"readme.*": "authors, backers.md, changelog*, citation*, code_of_conduct.md, codeowners, contributing.md, contributors, copying, credits, governance.md, history.md, license*, maintainers, readme*, security.md, sponsors.md",
 		"*.dart": "$(capture).g.dart, $(capture).freezed.dart, $(capture).mocks.dart"
 	},
-	// Exclude specified files from monitoring.
-	"files.watcherExclude": {
-		"**/.fvm": true
-	},
 	// Fetch commits automatically from the default remote of the current Git repository if `true`.
 	// When set to `all`, fetch from all remotes.
 	"git.autofetch": true,
@@ -130,7 +121,6 @@
 	"git.enableSmartCommit": true,
 	// Exclude generated files from the search targets.
 	"search.exclude": {
-		"**/.fvm": true,
 		"**/*.freezed.dart": true,
 		"**/*.g.dart": true
 	}
