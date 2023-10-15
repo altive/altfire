@@ -26,13 +26,12 @@ class Authenticator {
   final GoogleAuthenticator _googleAuth;
   final PhoneAuthenticator _phoneAuth;
 
-  /// 現在サインイン中のユーザー。Null Assertionを使用しているので、
-  /// `requireUser` にリネームした方が良さそう。
-  User get _user => _auth.currentUser!;
+  /// 現在サインイン中のユーザー。サインインしていない場合はnullを返す。
+  User? get user => _auth.currentUser;
 
   /// 現ユーザーのJWT(JSON Web Token)を非同期で取得する。
   /// 未サインイン時など、現ユーザーが存在しない場合はnullを返す。
-  Future<String?>? get fetchJsonWebToken => _auth.currentUser?.getIdToken();
+  Future<String?>? get fetchJwt => _auth.currentUser?.getIdToken();
 
   /// 匿名サインイン
   Future<UserCredential> signInAnonymously() async {
@@ -111,15 +110,19 @@ class Authenticator {
 
   /// アカウントを削除する
   Future<void> deleteAccount() async {
+    final user = this.user;
+    if (user == null) {
+      throw const AuthRequiresSignIn();
+    }
     try {
       // アカウントを削除実行
-      await _user.delete();
+      await user.delete();
     } on FirebaseAuthException catch (exception) {
       final e = AuthException.fromError(exception);
-      if (e is AuthRequiresReLogin) {
+      if (e is AuthRequiresRecentSignIn) {
         // 再認証の後、再度実行する
         await _reauthenticate();
-        await _user.delete();
+        await user.delete();
       } else {
         throw e;
       }
