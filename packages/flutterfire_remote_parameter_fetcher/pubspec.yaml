@@ -7,7 +7,7 @@ environment:
   sdk: ^3.0.0
 
 dependencies:
-  firebase_remote_config: ^4.3.2
+  firebase_remote_config: ^4.3.3
   meta: ^1.9.1
 
 dev_dependencies:
