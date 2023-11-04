@@ -1,0 +1,16 @@
+name: flutterfire_remote_parameter_fetcher
+description: flutterfire_remote_parameter_fetcher with FlutterFire Remote Config.
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ^3.0.0
+
+dependencies:
+  firebase_remote_config: ^4.3.3
+  meta: ^1.9.1
+
+dev_dependencies:
+  altive_lints: ^1.8.1
+  flutter_test:
+    sdk: flutter
