@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "282061201204",
+    "project_id": "flutterfire-adapter",
+    "storage_bucket": "flutterfire-adapter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282061201204:android:86708a3c3a298e18b04f61",
+        "android_client_info": {
+          "package_name": "jp.co.altive.flutterfireremoteparameterfetcher.example"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-QqWrVIJNsh-DOmV4OY4gVAi1jXW4e6s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
