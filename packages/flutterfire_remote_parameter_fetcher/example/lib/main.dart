@@ -55,18 +55,22 @@ class _MainAppState extends State<MainApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: const Text('FlutterFireRemoteParameterFetcher')),
-        body: ListView(
-          padding: const EdgeInsets.all(16),
-          children: [
-            Text('RemoteParameter value: $_intParameterValue'),
-            const SizedBox(height: 16),
-            FilledButton(
-              onPressed: () async {
-                await _intRemoteParameter.activateAndRefetch();
-              },
-              child: const Text('Activate and refetch'),
-            ),
-          ],
+        body: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text('RemoteParameter value: $_intParameterValue'),
+              const SizedBox(height: 16),
+              FilledButton(
+                onPressed: () async {
+                  await _intRemoteParameter.activateAndRefetch();
+                },
+                child: const Text('Activate and refetch'),
+              ),
+            ],
+          ),
         ),
       ),
     );
