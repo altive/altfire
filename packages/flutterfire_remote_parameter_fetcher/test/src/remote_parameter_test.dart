@@ -35,6 +35,7 @@ void main() {
       await Future<void>.delayed(Duration.zero);
 
       expect(updatedValue, 20);
+      expect(rp.value, 20);
     });
 
     test('should refetch value when config updates', () async {
