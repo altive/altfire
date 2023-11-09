@@ -15,8 +15,8 @@ abstract interface class Trackable {
   ///   [stackTrace] - The stack trace associated with the error.
   ///   [fatal] - A flag to indicate if the error is fatal. Defaults to false.
   Future<void> trackError(
-    Object error,
-    StackTrace stackTrace, {
+    dynamic error,
+    StackTrace? stackTrace, {
     bool fatal = false,
   });
 

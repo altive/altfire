@@ -120,7 +120,7 @@ class Tracker {
   /// Clear the set user ID.
   Future<void> clearUserId() async {
     await Future.wait([
-      setUserId(''),
+      _crashlytics.setUserIdentifier(''),
       _analytics.setUserId(),
       ..._trackers.map((tracker) => tracker.clearUserId()),
     ]);

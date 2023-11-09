@@ -39,12 +39,15 @@ void main() {
       verifyNoMoreInteractions(analytics);
     });
 
-    test('onPlatformError should call recordError on crashlytics', () async {
+    test('onPlatformError should call recordError on crashlytics and trackers',
+        () async {
       final crashlytics = MockFirebaseCrashlytics();
       final analytics = MockFirebaseAnalytics();
+      final trackable = MockTrackable();
       final tracker = Tracker(
         crashlytics: crashlytics,
         analytics: analytics,
+        trackers: [trackable],
       );
 
       final error = Exception('Test exception');
@@ -52,29 +55,44 @@ void main() {
       when(
         () => crashlytics.recordError(error, stack, fatal: true),
       ).thenAnswer((_) async {});
+      when(
+        () => trackable.trackError(error, stack, fatal: true),
+      ).thenAnswer((_) async {});
 
       final got = tracker.onPlatformError(error, stack);
 
       expect(got, true);
       verify(() => crashlytics.recordError(error, stack, fatal: true))
           .called(1);
+      verify(() => trackable.trackError(error, stack, fatal: true)).called(1);
       verifyNoMoreInteractions(crashlytics);
       verifyNoMoreInteractions(analytics);
+      verifyNoMoreInteractions(trackable);
     });
 
-    test('isolateErrorListener should call recordError on crashlytics',
-        () async {
+    test(
+        'isolateErrorListener should call recordError '
+        'on crashlytics and trackers', () async {
       final crashlytics = MockFirebaseCrashlytics();
       final analytics = MockFirebaseAnalytics();
+      final trackable = MockTrackable();
       final tracker = Tracker(
         crashlytics: crashlytics,
         analytics: analytics,
+        trackers: [trackable],
       );
 
       final error = Exception('Test exception');
       final stack = StackTrace.fromString('Test stack trace');
       when(
         () => crashlytics.recordError(
+          any<Object>(),
+          any(),
+          fatal: any(named: 'fatal'),
+        ),
+      ).thenAnswer((_) async {});
+      when(
+        () => trackable.trackError(
           any<Object>(),
           any(),
           fatal: any(named: 'fatal'),
@@ -96,11 +114,20 @@ void main() {
           fatal: any(named: 'fatal'),
         ),
       ).called(1);
+      verify(
+        () => trackable.trackError(
+          any<Object>(),
+          any(),
+          fatal: any(named: 'fatal'),
+        ),
+      ).called(1);
       verifyNoMoreInteractions(crashlytics);
       verifyNoMoreInteractions(analytics);
+      verifyNoMoreInteractions(trackable);
     });
 
-    test('recordError should call recordError on crashlytics', () async {
+    test('recordError should call recordError on crashlytics and trackers',
+        () async {
       final crashlytics = MockFirebaseCrashlytics();
       final analytics = MockFirebaseAnalytics();
       final trackable = MockTrackable();
@@ -131,52 +158,61 @@ void main() {
       verifyNoMoreInteractions(trackable);
     });
 
-    test('setUserId should call setUserIdentifier on crashlytics', () async {
+    test(
+        'setUserId should call setUserIdentifier '
+        'on crashlytics, analytics and trackers', () async {
       final crashlytics = MockFirebaseCrashlytics();
       final analytics = MockFirebaseAnalytics();
+      final trackable = MockTrackable();
       final tracker = Tracker(
         crashlytics: crashlytics,
         analytics: analytics,
+        trackers: [trackable],
       );
 
       const userId = 'b979be1991444eeb814acdccd594';
-      when(
-        () => crashlytics.setUserIdentifier(userId),
-      ).thenAnswer((_) async {});
-      when(
-        () => analytics.setUserId(id: userId),
-      ).thenAnswer((_) async {});
+      when(() => crashlytics.setUserIdentifier(userId))
+          .thenAnswer((_) async {});
+      when(() => analytics.setUserId(id: userId)).thenAnswer((_) async {});
+      when(() => trackable.setUserId(userId)).thenAnswer((_) async {});
 
       await tracker.setUserId(userId);
 
       verify(() => crashlytics.setUserIdentifier(userId)).called(1);
       verify(() => analytics.setUserId(id: userId)).called(1);
+      verify(() => trackable.setUserId(userId)).called(1);
       verifyNoMoreInteractions(crashlytics);
       verifyNoMoreInteractions(analytics);
+      verifyNoMoreInteractions(trackable);
     });
 
-    test('clearUserId should call setUserIdentifier on crashlytics', () async {
+    test(
+        'clearUserId should call setUserIdentifier '
+        'on crashlytics, analytics and trackers', () async {
       final crashlytics = MockFirebaseCrashlytics();
       final analytics = MockFirebaseAnalytics();
+      final trackable = MockTrackable();
       final tracker = Tracker(
         crashlytics: crashlytics,
         analytics: analytics,
+        trackers: [trackable],
       );
 
       const userId = '';
       when(
         () => crashlytics.setUserIdentifier(userId),
       ).thenAnswer((_) async {});
-      when(() => analytics.setUserId(id: userId)).thenAnswer((_) async {});
       when(analytics.setUserId).thenAnswer((_) async {});
+      when(trackable.clearUserId).thenAnswer((_) async {});
 
       await tracker.clearUserId();
 
       verify(() => crashlytics.setUserIdentifier(userId)).called(1);
-      verify(() => analytics.setUserId(id: userId)).called(1);
       verify(analytics.setUserId).called(1);
+      verify(trackable.clearUserId).called(1);
       verifyNoMoreInteractions(crashlytics);
       verifyNoMoreInteractions(analytics);
+      verifyNoMoreInteractions(trackable);
     });
 
     test('setUserProperties should call setUserProperty on analytics',
@@ -225,7 +261,7 @@ void main() {
       expect(got[0], isA<FirebaseAnalyticsObserver>());
     });
 
-    test('logEvent should call logEvent on analytics', () async {
+    test('logEvent should call logEvent on analytics and trackers', () async {
       final crashlytics = MockFirebaseCrashlytics();
       final analytics = MockFirebaseAnalytics();
       final trackable = MockTrackable();
