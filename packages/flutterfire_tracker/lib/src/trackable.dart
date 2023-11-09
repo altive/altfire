@@ -4,7 +4,7 @@
 /// analytics　and monitoring services. This class should be implemented
 /// by any service that　wants to handle the application's tracking data,
 /// such as events and errors.
-abstract class Trackable {
+abstract interface class Trackable {
   /// Tracks an error.
   ///
   /// Use this method to record errors that occur in the application.
