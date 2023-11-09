@@ -30,7 +30,7 @@ class Tracker {
   ///
   /// Usage example：
   /// ```dart
-  /// FlutterError.onError = analyticsReporter.onFlutterError;
+  /// FlutterError.onError = tracker.onFlutterError;
   /// ```
   ///
   Future<void> onFlutterError(
@@ -47,10 +47,11 @@ class Tracker {
   ///
   /// Usage example：
   /// ```dart
-  /// PlatformDispatcher.instance.onError = analyticsReporter.onPlatformError;
+  /// PlatformDispatcher.instance.onError = tracker.onPlatformError;
   /// ```
   bool onPlatformError(Object error, StackTrace stack) {
     unawaited(_crashlytics.recordError(error, stack, fatal: true));
+    _trackers.map((e) => unawaited(e.trackError(error, stack, fatal: true)));
     return true;
   }
 
@@ -60,17 +61,26 @@ class Tracker {
   /// Usage example：
   /// ```dart
   /// Isolate.current.addErrorListener(
-  ///   analyticsReporter.isolateErrorListener()
+  ///   tracker.isolateErrorListener()
   /// );
   /// ```
   SendPort isolateErrorListener() {
     return RawReceivePort((List<dynamic> pair) async {
       final errorAndStacktrace = pair;
-      await _crashlytics.recordError(
-        errorAndStacktrace.first,
-        errorAndStacktrace.last as StackTrace,
-        fatal: true,
-      );
+      await Future.wait([
+        _crashlytics.recordError(
+          errorAndStacktrace.first,
+          errorAndStacktrace.last as StackTrace,
+          fatal: true,
+        ),
+        ..._trackers.map(
+          (tracker) => tracker.trackError(
+            errorAndStacktrace.first as Object,
+            errorAndStacktrace.last as StackTrace,
+            fatal: true,
+          ),
+        ),
+      ]);
     }).sendPort;
   }
 
