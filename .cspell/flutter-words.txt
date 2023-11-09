@@ -21,6 +21,7 @@ lerp
 ltrb
 LTWH
 mockito
+mocktail
 nullsafety
 Podfile
 postbootstrap
