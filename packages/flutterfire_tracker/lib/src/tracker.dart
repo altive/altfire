@@ -51,7 +51,9 @@ class Tracker {
   /// ```
   bool onPlatformError(Object error, StackTrace stack) {
     unawaited(_crashlytics.recordError(error, stack, fatal: true));
-    _trackers.map((e) => unawaited(e.trackError(error, stack, fatal: true)));
+    for (final tracker in _trackers) {
+      unawaited(tracker.trackError(error, stack, fatal: true));
+    }
     return true;
   }
 
@@ -75,7 +77,7 @@ class Tracker {
         ),
         ..._trackers.map(
           (tracker) => tracker.trackError(
-            errorAndStacktrace.first as Object,
+            errorAndStacktrace.first,
             errorAndStacktrace.last as StackTrace,
             fatal: true,
           ),
@@ -108,14 +110,20 @@ class Tracker {
 
   /// Set the user ID.
   Future<void> setUserId(String userId) async {
-    await _crashlytics.setUserIdentifier(userId);
-    await _analytics.setUserId(id: userId);
+    await Future.wait([
+      _crashlytics.setUserIdentifier(userId),
+      _analytics.setUserId(id: userId),
+      ..._trackers.map((tracker) => tracker.setUserId(userId)),
+    ]);
   }
 
   /// Clear the set user ID.
   Future<void> clearUserId() async {
-    await setUserId('');
-    await _analytics.setUserId();
+    await Future.wait([
+      setUserId(''),
+      _analytics.setUserId(),
+      ..._trackers.map((tracker) => tracker.clearUserId()),
+    ]);
   }
 
   /// Set the user's properties.

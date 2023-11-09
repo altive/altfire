@@ -33,4 +33,19 @@ abstract interface class Trackable {
     String name, {
     Map<String, Object?>? parameters,
   });
+
+  /// Sets the user ID.
+  ///
+  /// This method allows for setting the user ID for the current user.
+  /// This is useful for associating events with a specific user.
+  ///
+  /// Parameters:
+  ///  [userId] - The user ID to set.
+  Future<void> setUserId(String userId);
+
+  /// Clears the user ID.
+  ///
+  /// This method allows for clearing the user ID for the current user.
+  /// This is useful for dissociating events with a specific user.
+  Future<void> clearUserId();
 }
