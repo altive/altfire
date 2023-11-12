@@ -6,83 +6,54 @@ import 'package:flutterfire_remote_parameter_fetcher/src/remote_parameter.dart';
 void main() {
   group('RemoteParameter', () {
     test('should initialize with correct value', () async {
+      final controller = StreamController<void>();
+      addTearDown(controller.close);
       final rp = RemoteParameter<int>(
         value: 10,
-        onConfigUpdated: const Stream<void>.empty(),
-        activateAndRefetch: () async => 10,
+        subscription: controller.stream.listen((event) {}),
       );
 
       expect(rp.value, 10);
     });
 
-    test('should call listener when value changes', () async {
-      final controller = StreamController<void>();
+    test('should update value when stream emits', () async {
+      final controller = StreamController<int>();
       addTearDown(controller.close);
-
-      final rp = RemoteParameter<int>(
-        value: 10,
-        onConfigUpdated: controller.stream,
-        activateAndRefetch: () async => 20,
+      var value = 10;
+      RemoteParameter<int>(
+        value: value,
+        subscription: controller.stream.listen((event) {
+          value = event;
+        }),
       );
 
-      int? updatedValue;
-      rp.addListener((value) {
-        updatedValue = value;
-      });
+      controller.add(20);
 
-      controller.add(null);
+      await pumpEventQueue();
 
-      await Future<void>.delayed(Duration.zero);
-
-      expect(updatedValue, 20);
-      expect(rp.value, 20);
+      expect(value, 20);
     });
 
-    test('should not call listener when removed', () async {
-      final controller = StreamController<void>();
+    test('should close subscription when dispose is called', () async {
+      final controller = StreamController<int>();
       addTearDown(controller.close);
-
+      var value = 10;
       final rp = RemoteParameter<int>(
         value: 10,
-        onConfigUpdated: controller.stream,
-        activateAndRefetch: () async => 20,
+        subscription: controller.stream.listen((event) {
+          value = event;
+        }),
       );
 
-      var updatedValue = 10;
-      void listener(int value) {
-        updatedValue = value;
-      }
+      controller.add(20);
+      await pumpEventQueue();
+      expect(value, 20);
 
-      rp.addListener(listener);
+      await rp.dispose();
 
-      await rp.removeListener(listener);
-      controller.add(null);
-      await Future<void>.delayed(Duration.zero);
-
-      expect(rp.value, 10);
-      expect(updatedValue, 10);
-    });
-
-    test('should refetch value when config updates', () async {
-      final controller = StreamController<void>();
-      addTearDown(controller.close);
-
-      var refetchCalled = false;
-      final rp = RemoteParameter<int>(
-        value: 10,
-        onConfigUpdated: controller.stream,
-        activateAndRefetch: () async {
-          refetchCalled = true;
-          return 20;
-        },
-      )..addListener((_) {});
-
-      controller.add(null);
-
-      await Future<void>.delayed(Duration.zero);
-
-      expect(refetchCalled, true);
-      expect(rp.value, 20);
+      controller.add(30);
+      await pumpEventQueue();
+      expect(value, 20);
     });
   });
 }

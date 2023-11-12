@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutterfire_remote_parameter_fetcher/remote_parameter_fetcher.dart';
-import 'package:flutterfire_remote_parameter_fetcher/src/remote_parameter.dart';
 
 import '../data_class.dart';
 
@@ -51,6 +50,19 @@ void main() {
       final target = RemoteParameterFetcher(rc: mockRC);
 
       final stream = target.onConfigUpdated;
+      expect(stream, isA<Stream<RemoteConfigUpdate>>());
+    });
+  });
+
+  group('filteredOnConfigUpdated', () {
+    test('Can retrieve the Stream of RemoteConfigUpdate filtered by key',
+        () async {
+      final mockRC = _FakeRemoteConfig();
+      final target = RemoteParameterFetcher(rc: mockRC);
+
+      const key = 'string_001';
+
+      final stream = target.filteredOnConfigUpdated(key);
       expect(stream, isA<Stream<RemoteConfigUpdate>>());
     });
   });
@@ -167,16 +179,30 @@ void main() {
   group('getStringParameter', () {
     test(
       'Can retrieve the RemoteParameter<String> corresponding to the key',
-      () {
+      () async {
         final mockRC = _FakeRemoteConfig();
         final target = RemoteParameterFetcher(rc: mockRC);
 
         const key = 'string_001';
+        var updatedValue = '';
 
-        final value = target.getStringParameter(key);
+        final parameter = target.getStringParameter(
+          key,
+          onConfigUpdated: (value) {
+            updatedValue = value;
+          },
+        );
 
-        expect(value, isA<RemoteParameter<String>>());
-        expect(value.value, equals('string_value'));
+        expect(parameter, isA<RemoteParameter<String>>());
+        expect(parameter.value, equals('string_value'));
+
+        mockRC.configUpdatesController.add(
+          RemoteConfigUpdate(<String>{key}),
+        );
+
+        await pumpEventQueue();
+
+        expect(updatedValue, equals('string_value'));
       },
     );
   });
@@ -184,16 +210,30 @@ void main() {
   group('getIntParameter', () {
     test(
       'Can retrieve the RemoteParameter<int> corresponding to the key',
-      () {
+      () async {
         final mockRC = _FakeRemoteConfig();
         final target = RemoteParameterFetcher(rc: mockRC);
 
         const key = 'int_001';
+        var updatedValue = 0;
 
-        final value = target.getIntParameter(key);
+        final value = target.getIntParameter(
+          key,
+          onConfigUpdated: (value) {
+            updatedValue = value;
+          },
+        );
 
         expect(value, isA<RemoteParameter<int>>());
         expect(value.value, equals(1));
+
+        mockRC.configUpdatesController.add(
+          RemoteConfigUpdate(<String>{key}),
+        );
+
+        await pumpEventQueue();
+
+        expect(updatedValue, equals(1));
       },
     );
   });
@@ -201,16 +241,30 @@ void main() {
   group('getDoubleParameter', () {
     test(
       'Can retrieve the RemoteParameter<double> corresponding to the key',
-      () {
+      () async {
         final mockRC = _FakeRemoteConfig();
         final target = RemoteParameterFetcher(rc: mockRC);
 
         const key = 'double_001';
+        var updatedValue = 0.0;
 
-        final value = target.getDoubleParameter(key);
+        final value = target.getDoubleParameter(
+          key,
+          onConfigUpdated: (value) {
+            updatedValue = value;
+          },
+        );
 
         expect(value, isA<RemoteParameter<double>>());
         expect(value.value, equals(0.1));
+
+        mockRC.configUpdatesController.add(
+          RemoteConfigUpdate(<String>{key}),
+        );
+
+        await pumpEventQueue();
+
+        expect(updatedValue, equals(0.1));
       },
     );
   });
@@ -218,16 +272,30 @@ void main() {
   group('getBoolParameter', () {
     test(
       'Can retrieve the RemoteParameter<bool> corresponding to the key',
-      () {
+      () async {
         final mockRC = _FakeRemoteConfig();
         final target = RemoteParameterFetcher(rc: mockRC);
 
         const key = 'bool_001';
+        var updatedValue = false;
 
-        final value = target.getBoolParameter(key);
+        final value = target.getBoolParameter(
+          key,
+          onConfigUpdated: (value) {
+            updatedValue = value;
+          },
+        );
 
         expect(value, isA<RemoteParameter<bool>>());
         expect(value.value, isTrue);
+
+        mockRC.configUpdatesController.add(
+          RemoteConfigUpdate(<String>{key}),
+        );
+
+        await pumpEventQueue();
+
+        expect(updatedValue, isTrue);
       },
     );
   });
@@ -236,16 +304,35 @@ void main() {
     test(
       'Can retrieve the RemoteParameter<Map<String, Object?>> '
       'corresponding to the key',
-      () {
+      () async {
         final mockRC = _FakeRemoteConfig();
         final target = RemoteParameterFetcher(rc: mockRC);
 
         const key = 'json_001';
+        var updatedValue = <String, Object?>{};
 
-        final value = target.getJsonParameter(key);
+        final value = target.getJsonParameter(
+          key,
+          onConfigUpdated: (value) {
+            updatedValue = value;
+          },
+        );
 
         expect(value, isA<RemoteParameter<Map<String, Object?>>>());
         expect(value.value, <String, Object?>{
+          'value_1': '01',
+          'value_2': 2,
+          'value_3': 3.0,
+          'value_4': true,
+        });
+
+        mockRC.configUpdatesController.add(
+          RemoteConfigUpdate(<String>{key}),
+        );
+
+        await pumpEventQueue();
+
+        expect(updatedValue, <String, Object?>{
           'value_1': '01',
           'value_2': 2,
           'value_3': 3.0,
@@ -259,17 +346,47 @@ void main() {
     test(
       'Can retrieve the RemoteParameter<List<Map<String, Object?>>> '
       'corresponding to the key',
-      () {
+      () async {
         final mockRC = _FakeRemoteConfig();
         final target = RemoteParameterFetcher(rc: mockRC);
 
         const key = 'list_json_001';
+        var updatedValue = <Map<String, Object?>>[];
 
-        final value = target.getListJsonParameter(key);
+        final value = target.getListJsonParameter(
+          key,
+          onConfigUpdated: (value) {
+            updatedValue = value;
+          },
+        );
 
         expect(value, isA<RemoteParameter<List<Map<String, Object?>>>>());
         expect(
           value.value,
+          [
+            {
+              'value_1a': '01a',
+              'value_2a': 2,
+              'value_3a': 3.0,
+              'value_4a': true,
+            },
+            {
+              'value_1b': '01b',
+              'value_2b': 20,
+              'value_3b': 3.5,
+              'value_4b': false,
+            }
+          ],
+        );
+
+        mockRC.configUpdatesController.add(
+          RemoteConfigUpdate(<String>{key}),
+        );
+
+        await pumpEventQueue();
+
+        expect(
+          updatedValue,
           [
             {
               'value_1a': '01a',
@@ -292,30 +409,42 @@ void main() {
   group('getDataParameter', () {
     test(
       'Can retrieve the RemoteParameter<Object> corresponding to the key',
-      () {
+      () async {
         final mockRC = _FakeRemoteConfig();
         final target = RemoteParameterFetcher(rc: mockRC);
 
         const key = 'data_001';
+        var updatedValue = const DataClass(value: '');
 
         final value = target.getDataParameter(
-          key: key,
+          key,
           fromJson: DataClass.fromJson,
+          onConfigUpdated: (value) {
+            updatedValue = value;
+          },
         );
 
         expect(value, isA<RemoteParameter<DataClass>>());
         expect(value.value, const DataClass(value: 'tokyo'));
+
+        mockRC.configUpdatesController.add(
+          RemoteConfigUpdate(<String>{key}),
+        );
+
+        await pumpEventQueue();
+
+        expect(updatedValue, const DataClass(value: 'tokyo'));
       },
     );
   });
 }
 
 class _FakeRemoteConfig extends Fake implements FirebaseRemoteConfig {
-  final _configUpdatesController = StreamController<RemoteConfigUpdate>();
+  final configUpdatesController = StreamController<RemoteConfigUpdate>();
 
   @override
   Stream<RemoteConfigUpdate> get onConfigUpdated =>
-      _configUpdatesController.stream;
+      configUpdatesController.stream;
 
   @override
   String getString(String key) {
@@ -376,7 +505,12 @@ class _FakeRemoteConfig extends Fake implements FirebaseRemoteConfig {
     return true;
   }
 
+  @override
+  Future<bool> activate() async {
+    return true;
+  }
+
   void dispose() {
-    unawaited(_configUpdatesController.close());
+    unawaited(configUpdatesController.close());
   }
 }
