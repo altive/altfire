@@ -111,7 +111,7 @@ class RemoteParameterFetcher {
         (config) => config.updatedKeys.contains(key),
       ),
       activateAndRefetch: () async {
-        await fetchAndActivate();
+        await activate();
         return getString(key);
       },
     );
@@ -125,7 +125,7 @@ class RemoteParameterFetcher {
         (config) => config.updatedKeys.contains(key),
       ),
       activateAndRefetch: () async {
-        await fetchAndActivate();
+        await activate();
         return getInt(key);
       },
     );
@@ -139,7 +139,7 @@ class RemoteParameterFetcher {
         (config) => config.updatedKeys.contains(key),
       ),
       activateAndRefetch: () async {
-        await fetchAndActivate();
+        await activate();
         return getDouble(key);
       },
     );
@@ -153,7 +153,7 @@ class RemoteParameterFetcher {
         (config) => config.updatedKeys.contains(key),
       ),
       activateAndRefetch: () async {
-        await fetchAndActivate();
+        await activate();
         return getBool(key);
       },
     );
@@ -167,7 +167,7 @@ class RemoteParameterFetcher {
         (config) => config.updatedKeys.contains(key),
       ),
       activateAndRefetch: () async {
-        await fetchAndActivate();
+        await activate();
         return getJson(key);
       },
     );
@@ -181,7 +181,7 @@ class RemoteParameterFetcher {
         (config) => config.updatedKeys.contains(key),
       ),
       activateAndRefetch: () async {
-        await fetchAndActivate();
+        await activate();
         return getListJson(key);
       },
     );
@@ -198,7 +198,7 @@ class RemoteParameterFetcher {
         (config) => config.updatedKeys.contains(key),
       ),
       activateAndRefetch: () async {
-        await fetchAndActivate();
+        await activate();
         return getData<T>(key: key, fromJson: fromJson);
       },
     );
