@@ -49,10 +49,13 @@ class RemoteParameterFetcher {
   }
 
   /// Provide a Stream of updated parameter information.
+  ///
+  /// NOTE: In the method form, each call inadvertently creates
+  /// a different Stream, resulting in only the latest one being functional.
+  /// To address this issue, we use a property form to ensure a unique and
+  /// consistent Stream for each instance.
   @visibleForTesting
-  Stream<RemoteConfigUpdate> get onConfigUpdated {
-    return _rc.onConfigUpdated;
-  }
+  late final Stream<RemoteConfigUpdate> onConfigUpdated = _rc.onConfigUpdated;
 
   @visibleForTesting
   String getString(String key) {
