@@ -30,7 +30,7 @@ class Authenticator {
   User? get user => _auth.currentUser;
 
   /// Listens for changes to the currently signed-in user.
-  Stream<User?> get userChanges => _auth.userChanges();
+  late final Stream<User?> userChanges = _auth.userChanges();
 
   /// 現ユーザーのJWT(JSON Web Token)を非同期で取得する。
   /// 未サインイン時など、現ユーザーが存在しない場合はnullを返す。
