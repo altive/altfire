@@ -14,6 +14,7 @@ void main() {
 class MockAuth extends Fake implements FirebaseAuth {}
 
 // TODO(riscait): add more tests
+// https://github.com/altive/flutterfire_adapter/issues/20
 // related links:
 // https://github.com/firebase/flutterfire/blob/master/packages/firebase_auth/firebase_auth/test/firebase_auth_test.dart
 // setupFirebaseAuthMocks

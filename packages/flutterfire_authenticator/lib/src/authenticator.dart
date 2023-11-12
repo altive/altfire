@@ -29,6 +29,9 @@ class Authenticator {
   /// 現在サインイン中のユーザー。サインインしていない場合はnullを返す。
   User? get user => _auth.currentUser;
 
+  /// Listens for changes to the currently signed-in user.
+  late final Stream<User?> userChanges = _auth.userChanges();
+
   /// 現ユーザーのJWT(JSON Web Token)を非同期で取得する。
   /// 未サインイン時など、現ユーザーが存在しない場合はnullを返す。
   Future<String?>? get fetchJwt => _auth.currentUser?.getIdToken();
