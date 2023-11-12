@@ -38,7 +38,9 @@ class _MainAppState extends State<MainApp> {
       'int_parameter',
       onConfigUpdated: (value) {
         debugPrint('remoteParameter value changed: $value');
-        _intParameterValue = value;
+        setState(() {
+          _intParameterValue = value;
+        });
       },
     );
     _intParameterValue = _intRemoteParameter.value;
