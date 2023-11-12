@@ -5,6 +5,8 @@ import 'package:meta/meta.dart';
 
 import 'remote_parameter.dart';
 
+typedef ValueChanged<T> = void Function(T value);
+
 /// A class that wraps Remote Config.
 /// Its role is to "fetch the configured parameters from remote and provide
 /// them".
@@ -57,6 +59,11 @@ class RemoteParameterFetcher {
   @visibleForTesting
   late final Stream<RemoteConfigUpdate> onConfigUpdated = _rc.onConfigUpdated;
 
+  /// Filter the Stream of updated parameter information by key.
+  Stream<RemoteConfigUpdate> filteredOnConfigUpdated(String key) {
+    return onConfigUpdated.where((config) => config.updatedKeys.contains(key));
+  }
+
   @visibleForTesting
   String getString(String key) {
     final value = _rc.getString(key);
@@ -107,103 +114,101 @@ class RemoteParameterFetcher {
   }
 
   /// Returns a [RemoteParameter] of type [String].
-  RemoteParameter<String> getStringParameter(String key) {
+  RemoteParameter<String> getStringParameter(
+    String key, {
+    required ValueChanged<String> onConfigUpdated,
+  }) {
     return RemoteParameter<String>(
       value: getString(key),
-      onConfigUpdated: onConfigUpdated.where(
-        (config) => config.updatedKeys.contains(key),
-      ),
-      activateAndRefetch: () async {
+      subscription: filteredOnConfigUpdated(key).listen((event) async {
         await activate();
-        return getString(key);
-      },
+        onConfigUpdated(getString(key));
+      }),
     );
   }
 
   /// Returns a [RemoteParameter] of type [int].
-  RemoteParameter<int> getIntParameter(String key) {
+  RemoteParameter<int> getIntParameter(
+    String key, {
+    required ValueChanged<int> onConfigUpdated,
+  }) {
     return RemoteParameter<int>(
       value: getInt(key),
-      onConfigUpdated: onConfigUpdated.where(
-        (config) => config.updatedKeys.contains(key),
-      ),
-      activateAndRefetch: () async {
+      subscription: filteredOnConfigUpdated(key).listen((event) async {
         await activate();
-        return getInt(key);
-      },
+        onConfigUpdated(getInt(key));
+      }),
     );
   }
 
   /// Returns a [RemoteParameter] of type [double].
-  RemoteParameter<double> getDoubleParameter(String key) {
+  RemoteParameter<double> getDoubleParameter(
+    String key, {
+    required ValueChanged<double> onConfigUpdated,
+  }) {
     return RemoteParameter<double>(
       value: getDouble(key),
-      onConfigUpdated: onConfigUpdated.where(
-        (config) => config.updatedKeys.contains(key),
-      ),
-      activateAndRefetch: () async {
+      subscription: filteredOnConfigUpdated(key).listen((event) async {
         await activate();
-        return getDouble(key);
-      },
+        onConfigUpdated(getDouble(key));
+      }),
     );
   }
 
   /// Returns a [RemoteParameter] of type [bool].
-  RemoteParameter<bool> getBoolParameter(String key) {
+  RemoteParameter<bool> getBoolParameter(
+    String key, {
+    required ValueChanged<bool> onConfigUpdated,
+  }) {
     return RemoteParameter<bool>(
       value: getBool(key),
-      onConfigUpdated: onConfigUpdated.where(
-        (config) => config.updatedKeys.contains(key),
-      ),
-      activateAndRefetch: () async {
+      subscription: filteredOnConfigUpdated(key).listen((event) async {
         await activate();
-        return getBool(key);
-      },
+        onConfigUpdated(getBool(key));
+      }),
     );
   }
 
   /// Returns a [RemoteParameter] of type [Map].
-  RemoteParameter<Map<String, Object?>> getJsonParameter(String key) {
+  RemoteParameter<Map<String, Object?>> getJsonParameter(
+    String key, {
+    required void Function(Map<String, Object?> value) onConfigUpdated,
+  }) {
     return RemoteParameter<Map<String, Object?>>(
       value: getJson(key),
-      onConfigUpdated: onConfigUpdated.where(
-        (config) => config.updatedKeys.contains(key),
-      ),
-      activateAndRefetch: () async {
+      subscription: filteredOnConfigUpdated(key).listen((event) async {
         await activate();
-        return getJson(key);
-      },
+        onConfigUpdated(getJson(key));
+      }),
     );
   }
 
   /// Returns a [RemoteParameter] of type [List] of [Map].
-  RemoteParameter<List<Map<String, Object?>>> getListJsonParameter(String key) {
+  RemoteParameter<List<Map<String, Object?>>> getListJsonParameter(
+    String key, {
+    required ValueChanged<List<Map<String, Object?>>> onConfigUpdated,
+  }) {
     return RemoteParameter<List<Map<String, Object?>>>(
       value: getListJson(key),
-      onConfigUpdated: onConfigUpdated.where(
-        (config) => config.updatedKeys.contains(key),
-      ),
-      activateAndRefetch: () async {
+      subscription: filteredOnConfigUpdated(key).listen((event) async {
         await activate();
-        return getListJson(key);
-      },
+        onConfigUpdated(getListJson(key));
+      }),
     );
   }
 
   /// Returns a [RemoteParameter] of type [T].
-  RemoteParameter<T> getDataParameter<T extends Object>({
-    required String key,
+  RemoteParameter<T> getDataParameter<T extends Object>(
+    String key, {
     required T Function(Map<String, Object?>) fromJson,
+    required ValueChanged<T> onConfigUpdated,
   }) {
     return RemoteParameter<T>(
       value: getData<T>(key: key, fromJson: fromJson),
-      onConfigUpdated: onConfigUpdated.where(
-        (config) => config.updatedKeys.contains(key),
-      ),
-      activateAndRefetch: () async {
+      subscription: filteredOnConfigUpdated(key).listen((event) async {
         await activate();
-        return getData<T>(key: key, fromJson: fromJson);
-      },
+        onConfigUpdated(getData(key: key, fromJson: fromJson));
+      }),
     );
   }
 }
