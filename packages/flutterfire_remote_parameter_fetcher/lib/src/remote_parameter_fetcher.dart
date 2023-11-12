@@ -172,7 +172,7 @@ class RemoteParameterFetcher {
   /// Returns a [RemoteParameter] of type [Map].
   RemoteParameter<Map<String, Object?>> getJsonParameter(
     String key, {
-    required void Function(Map<String, Object?> value) onConfigUpdated,
+    required ValueChanged<Map<String, Object?>> onConfigUpdated,
   }) {
     return RemoteParameter<Map<String, Object?>>(
       value: getJson(key),
