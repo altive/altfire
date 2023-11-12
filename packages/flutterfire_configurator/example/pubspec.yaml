@@ -1,0 +1,21 @@
+name: flutterfire_configurator_example
+description: Demonstrates how to use the flutterfire_configurator package.
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.1.5 <4.0.0"
+
+dependencies:
+  firebase_analytics: ^10.6.3
+  firebase_core: ^2.21.0
+  flutter:
+    sdk: flutter
+  flutterfire_configurator:
+    path: ../
+
+dev_dependencies:
+  altive_lints: ^1.8.1
+
+flutter:
+  uses-material-design: true

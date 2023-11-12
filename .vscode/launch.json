@@ -5,8 +5,8 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "flutterfire_remote_parameter_fetcher/example",
-            "cwd": "packages/flutterfire_remote_parameter_fetcher/example",
+            "name": "flutterfire_configurator/example",
+            "cwd": "packages/flutterfire_configurator/example",
             "request": "launch",
             "type": "dart",
             "flutterMode": "debug"
