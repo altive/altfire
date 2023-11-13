@@ -7,6 +7,7 @@ export 'package:firebase_auth/firebase_auth.dart'
         OAuthCredential,
         OAuthProvider,
         PhoneAuthProvider,
+        User,
         UserCredential;
 
 export 'src/auth_exception.dart';
