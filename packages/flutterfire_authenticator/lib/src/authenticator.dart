@@ -142,4 +142,8 @@ class Authenticator {
       throw UnimplementedError('未対応のSigningMethodがあります。');
     }
   }
+
+  /// Changes this instance to point to an Auth emulator running locally.
+  Future<void> useEmulator(String host, int port) =>
+      _auth.useAuthEmulator(host, port);
 }
