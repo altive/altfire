@@ -176,7 +176,7 @@ void main() {
     });
   });
 
-  group('getStringParameter', () {
+  group('getStringConfig', () {
     test(
       'Can retrieve the Config<String> corresponding to the key',
       () async {
@@ -186,15 +186,15 @@ void main() {
         const key = 'string_001';
         var updatedValue = '';
 
-        final parameter = target.getStringParameter(
+        final config = target.getStringConfig(
           key,
           onConfigUpdated: (value) {
             updatedValue = value;
           },
         );
 
-        expect(parameter, isA<Config<String>>());
-        expect(parameter.value, equals('string_value'));
+        expect(config, isA<Config<String>>());
+        expect(config.value, equals('string_value'));
 
         mockRC.configUpdatesController.add(
           RemoteConfigUpdate(<String>{key}),
@@ -207,7 +207,7 @@ void main() {
     );
   });
 
-  group('getIntParameter', () {
+  group('getIntConfig', () {
     test(
       'Can retrieve the Config<int> corresponding to the key',
       () async {
@@ -217,15 +217,15 @@ void main() {
         const key = 'int_001';
         var updatedValue = 0;
 
-        final value = target.getIntParameter(
+        final config = target.getIntConfig(
           key,
           onConfigUpdated: (value) {
             updatedValue = value;
           },
         );
 
-        expect(value, isA<Config<int>>());
-        expect(value.value, equals(1));
+        expect(config, isA<Config<int>>());
+        expect(config.value, equals(1));
 
         mockRC.configUpdatesController.add(
           RemoteConfigUpdate(<String>{key}),
@@ -238,7 +238,7 @@ void main() {
     );
   });
 
-  group('getDoubleParameter', () {
+  group('getDoubleConfig', () {
     test(
       'Can retrieve the Config<double> corresponding to the key',
       () async {
@@ -248,15 +248,15 @@ void main() {
         const key = 'double_001';
         var updatedValue = 0.0;
 
-        final value = target.getDoubleParameter(
+        final config = target.getDoubleConfig(
           key,
           onConfigUpdated: (value) {
             updatedValue = value;
           },
         );
 
-        expect(value, isA<Config<double>>());
-        expect(value.value, equals(0.1));
+        expect(config, isA<Config<double>>());
+        expect(config.value, equals(0.1));
 
         mockRC.configUpdatesController.add(
           RemoteConfigUpdate(<String>{key}),
@@ -269,7 +269,7 @@ void main() {
     );
   });
 
-  group('getBoolParameter', () {
+  group('getBoolConfig', () {
     test(
       'Can retrieve the Config<bool> corresponding to the key',
       () async {
@@ -279,15 +279,15 @@ void main() {
         const key = 'bool_001';
         var updatedValue = false;
 
-        final value = target.getBoolParameter(
+        final config = target.getBoolConfig(
           key,
           onConfigUpdated: (value) {
             updatedValue = value;
           },
         );
 
-        expect(value, isA<Config<bool>>());
-        expect(value.value, isTrue);
+        expect(config, isA<Config<bool>>());
+        expect(config.value, isTrue);
 
         mockRC.configUpdatesController.add(
           RemoteConfigUpdate(<String>{key}),
@@ -300,7 +300,7 @@ void main() {
     );
   });
 
-  group('getJsonParameter', () {
+  group('getJsonConfig', () {
     test(
       'Can retrieve the Config<Map<String, Object?>> '
       'corresponding to the key',
@@ -311,15 +311,15 @@ void main() {
         const key = 'json_001';
         var updatedValue = <String, Object?>{};
 
-        final value = target.getJsonParameter(
+        final config = target.getJsonConfig(
           key,
           onConfigUpdated: (value) {
             updatedValue = value;
           },
         );
 
-        expect(value, isA<Config<Map<String, Object?>>>());
-        expect(value.value, <String, Object?>{
+        expect(config, isA<Config<Map<String, Object?>>>());
+        expect(config.value, <String, Object?>{
           'value_1': '01',
           'value_2': 2,
           'value_3': 3.0,
@@ -342,7 +342,7 @@ void main() {
     );
   });
 
-  group('getListJsonParameter', () {
+  group('getListJsonConfig', () {
     test(
       'Can retrieve the Config<List<Map<String, Object?>>> '
       'corresponding to the key',
@@ -353,16 +353,16 @@ void main() {
         const key = 'list_json_001';
         var updatedValue = <Map<String, Object?>>[];
 
-        final value = target.getListJsonParameter(
+        final config = target.getListJsonConfig(
           key,
           onConfigUpdated: (value) {
             updatedValue = value;
           },
         );
 
-        expect(value, isA<Config<List<Map<String, Object?>>>>());
+        expect(config, isA<Config<List<Map<String, Object?>>>>());
         expect(
-          value.value,
+          config.value,
           [
             {
               'value_1a': '01a',
@@ -406,7 +406,7 @@ void main() {
     );
   });
 
-  group('getDataParameter', () {
+  group('getDataConfig', () {
     test(
       'Can retrieve the Config<Object> corresponding to the key',
       () async {
@@ -416,7 +416,7 @@ void main() {
         const key = 'data_001';
         var updatedValue = const DataClass(value: '');
 
-        final value = target.getDataParameter(
+        final config = target.getDataConfig(
           key,
           fromJson: DataClass.fromJson,
           onConfigUpdated: (value) {
@@ -424,8 +424,8 @@ void main() {
           },
         );
 
-        expect(value, isA<Config<DataClass>>());
-        expect(value.value, const DataClass(value: 'tokyo'));
+        expect(config, isA<Config<DataClass>>());
+        expect(config.value, const DataClass(value: 'tokyo'));
 
         mockRC.configUpdatesController.add(
           RemoteConfigUpdate(<String>{key}),

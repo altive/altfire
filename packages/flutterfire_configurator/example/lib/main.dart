@@ -34,7 +34,7 @@ class _MainAppState extends State<MainApp> {
   @override
   void initState() {
     super.initState();
-    _intConfig = configurator.getIntParameter(
+    _intConfig = configurator.getIntConfig(
       'int_parameter',
       onConfigUpdated: (value) {
         debugPrint('Config value changed: $value');

@@ -114,7 +114,7 @@ class Configurator {
   }
 
   /// Returns a [Config] of type [String].
-  Config<String> getStringParameter(
+  Config<String> getStringConfig(
     String key, {
     required ValueChanged<String> onConfigUpdated,
   }) {
@@ -128,7 +128,7 @@ class Configurator {
   }
 
   /// Returns a [Config] of type [int].
-  Config<int> getIntParameter(
+  Config<int> getIntConfig(
     String key, {
     required ValueChanged<int> onConfigUpdated,
   }) {
@@ -142,7 +142,7 @@ class Configurator {
   }
 
   /// Returns a [Config] of type [double].
-  Config<double> getDoubleParameter(
+  Config<double> getDoubleConfig(
     String key, {
     required ValueChanged<double> onConfigUpdated,
   }) {
@@ -156,7 +156,7 @@ class Configurator {
   }
 
   /// Returns a [Config] of type [bool].
-  Config<bool> getBoolParameter(
+  Config<bool> getBoolConfig(
     String key, {
     required ValueChanged<bool> onConfigUpdated,
   }) {
@@ -170,7 +170,7 @@ class Configurator {
   }
 
   /// Returns a [Config] of type [Map].
-  Config<Map<String, Object?>> getJsonParameter(
+  Config<Map<String, Object?>> getJsonConfig(
     String key, {
     required ValueChanged<Map<String, Object?>> onConfigUpdated,
   }) {
@@ -184,7 +184,7 @@ class Configurator {
   }
 
   /// Returns a [Config] of type [List] of [Map].
-  Config<List<Map<String, Object?>>> getListJsonParameter(
+  Config<List<Map<String, Object?>>> getListJsonConfig(
     String key, {
     required ValueChanged<List<Map<String, Object?>>> onConfigUpdated,
   }) {
@@ -198,7 +198,7 @@ class Configurator {
   }
 
   /// Returns a [Config] of type [T].
-  Config<T> getDataParameter<T extends Object>(
+  Config<T> getDataConfig<T extends Object>(
     String key, {
     required T Function(Map<String, Object?>) fromJson,
     required ValueChanged<T> onConfigUpdated,
