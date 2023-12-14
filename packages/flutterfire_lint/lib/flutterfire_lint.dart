@@ -1,0 +1,1 @@
+library flutterfire_lint;
