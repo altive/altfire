@@ -3,9 +3,10 @@ on:
   pull_request:
     types: [opened]
 jobs:
-  assignAuthor:
+  assign:
     name: Assign author to PR
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - name: Assign author to PR
         uses: technote-space/assign-author@v1

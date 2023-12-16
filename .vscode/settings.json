@@ -75,7 +75,7 @@
 		// Even if the completion list is not displayed, pressing <TAB> will complete snippets like `for`.
 		"editor.tabCompletion": "onlySnippets",
 		// Disable the behavior where code completion suggests words during editing of comments or strings.
-		"editor.wordBasedSuggestions": false,
+		"editor.wordBasedSuggestions": "off",
 		// Code actions executed upon file save.
 		"editor.codeActionsOnSave": {
 			// Insert a semicolon.
