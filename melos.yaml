@@ -7,6 +7,22 @@ packages:
 command:
   bootstrap:
     runPubGetInParallel: true
+    environment:
+      sdk: ^3.0.0
+    dependencies:
+      collection: ^1.18.0
+      firebase_analytics: ^10.6.3
+      firebase_auth: ^4.10.1
+      firebase_core: ^2.21.0
+      firebase_crashlytics: ^3.4.3
+      firebase_in_app_messaging: ^0.7.4+6
+      firebase_messaging: ^14.7.6
+      firebase_remote_config: ^4.3.3
+      meta: ^1.10.0
+    dev_dependencies:
+      altive_lints: ^1.9.0
+      mocktail: ^1.0.2
+
   clean:
     hooks:
       post: |

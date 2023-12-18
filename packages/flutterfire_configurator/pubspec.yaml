@@ -8,9 +8,9 @@ environment:
 
 dependencies:
   firebase_remote_config: ^4.3.3
-  meta: ^1.9.1
+  meta: ^1.10.0
 
 dev_dependencies:
-  altive_lints: ^1.8.1
+  altive_lints: ^1.9.0
   flutter_test:
     sdk: flutter
