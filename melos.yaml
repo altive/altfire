@@ -73,7 +73,6 @@ scripts:
         dart run custom_lint
     description: Run custom_lint.
     packageFilters:
-      dirExists: lib
       dependsOn: "custom_lint"
 
   format:
