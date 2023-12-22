@@ -3,6 +3,7 @@ import 'package:analyzer/dart/element/type.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 
+/// LintRule to ensure that Config instances are disposed.
 class DisposeConfig extends DartLintRule {
   const DisposeConfig() : super(code: _code);
 
@@ -13,12 +14,14 @@ class DisposeConfig extends DartLintRule {
         "'Config' was created.",
   );
 
-  bool isConfig(DartType type) => const TypeChecker.fromName(
+  /// Returns true if the given [type] is a Config of flutterfire_configurator.
+  bool _isConfig(DartType type) => const TypeChecker.fromName(
         'Config',
         packageName: 'flutterfire_configurator',
       ).isExactlyType(type);
 
-  Iterable<MethodInvocation> traverseMethodInvocations(AstNode node) {
+  /// Returns all method invocations in the given [node].
+  Iterable<MethodInvocation> _traverseMethodInvocations(AstNode node) {
     final methodInvocations = <MethodInvocation>[];
     void visitNode(AstNode node) {
       if (node is MethodInvocation) {
@@ -37,7 +40,8 @@ class DisposeConfig extends DartLintRule {
     return methodInvocations;
   }
 
-  Iterable<PrefixedIdentifier> traversePrefixedIdentifiers(AstNode node) {
+  /// Returns all prefixed identifiers in the given [node].
+  Iterable<PrefixedIdentifier> _traversePrefixedIdentifiers(AstNode node) {
     final prefixedIdentifiers = <PrefixedIdentifier>[];
     void visitNode(AstNode node) {
       if (node is PrefixedIdentifier) {
@@ -61,7 +65,7 @@ class DisposeConfig extends DartLintRule {
       if (targetType == null) {
         return;
       }
-      if (!isConfig(targetType)) {
+      if (!_isConfig(targetType)) {
         return;
       }
 
@@ -70,7 +74,7 @@ class DisposeConfig extends DartLintRule {
         return;
       }
 
-      final methodInvocations = traverseMethodInvocations(compilationUnit);
+      final methodInvocations = _traverseMethodInvocations(compilationUnit);
       for (final field in node.fields.variables) {
         var isDisposed = false;
         for (final methodInvocation in methodInvocations) {
@@ -99,7 +103,7 @@ class DisposeConfig extends DartLintRule {
           continue;
         }
 
-        if (!isConfig(variableType)) {
+        if (!_isConfig(variableType)) {
           continue;
         }
 
@@ -110,7 +114,7 @@ class DisposeConfig extends DartLintRule {
 
         var isDisposed = false;
 
-        final methodInvocations = traverseMethodInvocations(function);
+        final methodInvocations = _traverseMethodInvocations(function);
         for (final methodInvocation in methodInvocations) {
           final target = methodInvocation.realTarget;
           if (target is! SimpleIdentifier) {
@@ -123,7 +127,7 @@ class DisposeConfig extends DartLintRule {
           }
         }
 
-        final prefixIdentifiers = traversePrefixedIdentifiers(function);
+        final prefixIdentifiers = _traversePrefixedIdentifiers(function);
         for (final prefixedIdentifier in prefixIdentifiers) {
           final prefix = prefixedIdentifier.prefix;
           final identifier = prefixedIdentifier.identifier;
