@@ -12,6 +12,7 @@ void main() {
         value: 10,
         subscription: controller.stream.listen((event) {}),
       );
+      addTearDown(config.dispose);
 
       expect(config.value, 10);
     });
