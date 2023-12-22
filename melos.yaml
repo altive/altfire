@@ -42,12 +42,39 @@ scripts:
 
   analyze:
     run: |
+      melos run analyze:dart --no-select
+      melos run analyze:flutter --no-select
+      melos run analyze:custom_lint --no-select
+    description: Run all analyze.
+    packageFilters:
+      dirExists: lib
+
+  analyze:dart:
+    run: |
+      melos exec -- \
+        dart analyze . --fatal-infos
+    description: Run analyze.
+    packageFilters:
+      flutter: false
+      dirExists: lib
+
+  analyze:flutter:
+    run: |
       melos exec -- \
         flutter analyze . --fatal-infos
     description: Run analyze.
     packageFilters:
       flutter: true
       dirExists: lib
+
+  analyze:custom_lint:
+    run: |
+      melos exec -- \
+        dart run custom_lint
+    description: Run custom_lint.
+    packageFilters:
+      dirExists: lib
+      dependsOn: "custom_lint"
 
   format:
     run: |
