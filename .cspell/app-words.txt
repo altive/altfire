@@ -1,2 +1,3 @@
 # App Specific Words
+altfire
 configurator

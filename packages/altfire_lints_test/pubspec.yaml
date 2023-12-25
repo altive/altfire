@@ -1,4 +1,4 @@
-name: flutterfire_lint_test
+name: altfire_lints_test
 publish_to: none
 
 environment:
@@ -10,12 +10,12 @@ dependencies:
   flutterfire_configurator:
 
 dev_dependencies:
+  altfire_lints:
+    path: ../altfire_lints
   altive_lints: ^1.9.0
   custom_lint: ^0.5.7
   flutter_test:
     sdk: flutter
-  flutterfire_lint:
-    path: ../flutterfire_lint
 
 dependency_overrides:
   flutterfire_configurator:

@@ -1,5 +1,5 @@
-name: flutterfire_lint
-description: flutterfire_lint is helpful in preventing common issues with wrapper packages for flutterfire.
+name: altfire_lints
+description: altfire_lints is helpful in preventing common issues with wrapper packages for flutterfire.
 version: 0.0.1
 
 environment:
