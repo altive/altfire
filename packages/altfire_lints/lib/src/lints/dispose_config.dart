@@ -14,10 +14,10 @@ class DisposeConfig extends DartLintRule {
         "'Config' was created.",
   );
 
-  /// Returns true if the given [type] is a Config of flutterfire_configurator.
+  /// Returns true if the given [type] is a Config of altfire_configurator.
   bool _isConfig(DartType type) => const TypeChecker.fromName(
         'Config',
-        packageName: 'flutterfire_configurator',
+        packageName: 'altfire_configurator',
       ).isExactlyType(type);
 
   /// Returns all method invocations in the given [node].

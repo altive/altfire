@@ -5,9 +5,9 @@ environment:
   sdk: ^3.0.0
 
 dependencies:
+  altfire_configurator:
   flutter:
     sdk: flutter
-  flutterfire_configurator:
 
 dev_dependencies:
   altfire_lints:
@@ -18,5 +18,5 @@ dev_dependencies:
     sdk: flutter
 
 dependency_overrides:
-  flutterfire_configurator:
-    path: ../flutterfire_configurator
+  altfire_configurator:
+    path: ../altfire_configurator

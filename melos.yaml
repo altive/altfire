@@ -1,5 +1,5 @@
-name: flutterfire_adapter
-repository: https://github.com/altive/flutterfire_adapter
+name: altfire
+repository: https://github.com/altive/altfire
 
 packages:
   - packages/*
