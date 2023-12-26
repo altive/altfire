@@ -34,7 +34,9 @@ class Authenticator {
 
   /// 現ユーザーのJWT(JSON Web Token)を非同期で取得する。
   /// 未サインイン時など、現ユーザーが存在しない場合はnullを返す。
-  Future<String?>? get fetchJwt => _auth.currentUser?.getIdToken();
+  /// forceRefreshが`true`の場合、トークンを強制的に更新する。
+  Future<String?>? fetchJwt({bool forceRefresh = false}) =>
+      _auth.currentUser?.getIdToken(forceRefresh);
 
   /// 匿名サインイン
   Future<UserCredential> signInAnonymously() async {
