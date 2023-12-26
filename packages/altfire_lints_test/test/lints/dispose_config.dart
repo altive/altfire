@@ -1,7 +1,7 @@
 import 'dart:async';
 
+import 'package:altfire_configurator/configurator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterfire_configurator/configurator.dart';
 
 int example() {
   // expect_lint: dispose_config

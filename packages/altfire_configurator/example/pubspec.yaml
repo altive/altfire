@@ -1,0 +1,24 @@
+name: altfire_configurator_example
+description: Demonstrates how to use the altfire_configurator package.
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.1.5 <4.0.0"
+
+dependencies:
+  altfire_configurator:
+    path: ../
+  firebase_analytics: ^10.6.3
+  firebase_core: ^2.21.0
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  altfire_lints:
+    path: ../../altfire_lints
+  altive_lints: ^1.8.1
+  custom_lint: ^0.5.7
+
+flutter:
+  uses-material-design: true
