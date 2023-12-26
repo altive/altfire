@@ -192,6 +192,7 @@ void main() {
             updatedValue = value;
           },
         );
+        addTearDown(config.dispose);
 
         expect(config, isA<Config<String>>());
         expect(config.value, equals('string_value'));
@@ -223,6 +224,7 @@ void main() {
             updatedValue = value;
           },
         );
+        addTearDown(config.dispose);
 
         expect(config, isA<Config<int>>());
         expect(config.value, equals(1));
@@ -254,6 +256,7 @@ void main() {
             updatedValue = value;
           },
         );
+        addTearDown(config.dispose);
 
         expect(config, isA<Config<double>>());
         expect(config.value, equals(0.1));
@@ -285,6 +288,7 @@ void main() {
             updatedValue = value;
           },
         );
+        addTearDown(config.dispose);
 
         expect(config, isA<Config<bool>>());
         expect(config.value, isTrue);
@@ -317,6 +321,7 @@ void main() {
             updatedValue = value;
           },
         );
+        addTearDown(config.dispose);
 
         expect(config, isA<Config<Map<String, Object?>>>());
         expect(config.value, <String, Object?>{
@@ -359,6 +364,7 @@ void main() {
             updatedValue = value;
           },
         );
+        addTearDown(config.dispose);
 
         expect(config, isA<Config<List<Map<String, Object?>>>>());
         expect(
@@ -423,6 +429,7 @@ void main() {
             updatedValue = value;
           },
         );
+        addTearDown(config.dispose);
 
         expect(config, isA<Config<DataClass>>());
         expect(config.value, const DataClass(value: 'tokyo'));

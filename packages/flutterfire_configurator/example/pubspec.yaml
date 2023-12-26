@@ -15,7 +15,10 @@ dependencies:
     path: ../
 
 dev_dependencies:
+  altfire_lints:
+    path: ../../altfire_lints
   altive_lints: ^1.8.1
+  custom_lint: ^0.5.7
 
 flutter:
   uses-material-design: true
