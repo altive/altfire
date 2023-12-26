@@ -108,6 +108,10 @@ class Tracker {
     ]);
   }
 
+  /// Returns a list of StackTraceElements from a StackTrace.
+  List<Map<String, String>> getStackTraceElements(StackTrace stackTrace) =>
+      getStackTraceElements(stackTrace);
+
   /// Set the user ID.
   Future<void> setUserId(String userId) async {
     await Future.wait([
