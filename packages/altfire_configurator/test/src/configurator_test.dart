@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:altfire_configurator/configurator.dart';
+import 'package:altfire_configurator/altfire_configurator.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter_test/flutter_test.dart';
 
