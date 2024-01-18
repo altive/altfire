@@ -5,33 +5,42 @@ import 'package:flutter/material.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  final tracker = Tracker();
-  runApp(_MainAppState(tracker: tracker));
+
+  runApp(
+    MaterialApp(
+      home: HomePage(tracker: Tracker()),
+    ),
+  );
 }
 
-class _MainAppState extends StatelessWidget {
-  const _MainAppState({required this.tracker});
+class HomePage extends StatelessWidget {
+  const HomePage({
+    super.key,
+    required this.tracker,
+  });
 
   final Tracker tracker;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('altfire tracker')),
-        body: Center(
-          child: ElevatedButton(
-            child: const Text('Log event'),
-            onPressed: () {
-              tracker.logEvent('example_event');
+      appBar: AppBar(title: const Text('altfire tracker')),
+      body: Center(
+        child: FilledButton(
+          child: const Text('Log event'),
+          onPressed: () {
+            tracker.logEvent('example_event');
 
-              try {
-                throw Exception('example exception');
-              } catch (error, stackTrace) {
-                tracker.recordError(error, stackTrace);
-              }
-            },
-          ),
-        ));
+            try {
+              throw Exception('example exception');
+            } catch (error, stackTrace) {
+              tracker.recordError(error, stackTrace);
+            }
+          },
+        ),
+      ),
+    );
   }
 }
