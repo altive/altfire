@@ -1,5 +1,5 @@
 name: altfire_tracker_example
-description: "A new Flutter project."
+description: "Demonstrates how to use the altfire_tracker package. "
 publish_to: "none"
 version: 0.1.0
 
@@ -9,15 +9,14 @@ environment:
 dependencies:
   altfire_tracker:
     path: ../
-  firebase_analytics: ^10.6.3
   firebase_core: ^2.21.0
   flutter:
     sdk: flutter
 
 dev_dependencies:
+  altive_lints: ^1.8.1
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
 
 flutter:
   uses-material-design: true

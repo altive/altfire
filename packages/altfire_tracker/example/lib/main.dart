@@ -1,10 +1,12 @@
+import 'dart:async';
 import 'dart:isolate';
 import 'dart:ui';
 
 import 'package:altfire_tracker/altfire_tracker.dart';
-import 'package:altfire_tracker_example/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
+import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +17,7 @@ Future<void> main() async {
   FlutterError.onError = tracker.onFlutterError;
   PlatformDispatcher.instance.onError = tracker.onPlatformError;
   Isolate.current.addErrorListener(tracker.isolateErrorListener());
-  tracker.setUserId('example_user_id');
+  await tracker.setUserId('example_user_id');
 
   runApp(
     MaterialApp(
@@ -37,19 +39,39 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('altfire_tracker example')),
       body: Center(
-        child: FilledButton(
-          child: const Text('Log event'),
-          onPressed: () {
-            tracker.logEvent('example_event', parameters: {
-              'example_key': 'example_value',
-            });
-
-            try {
-              throw Exception('example exception');
-            } catch (e, stackTrace) {
-              tracker.recordError(e, stackTrace);
-            }
-          },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FilledButton(
+              child: const Text('Log event'),
+              onPressed: () {
+                unawaited(
+                  tracker.logEvent(
+                    'example_event',
+                    parameters: {
+                      'example_key': 'example_value',
+                    },
+                  ),
+                );
+              },
+            ),
+            FilledButton(
+              onPressed: () {
+                try {
+                  throw Exception('example exception');
+                } on Exception catch (e, stackTrace) {
+                  unawaited(tracker.recordError(e, stackTrace));
+                }
+              },
+              child: const Text('Record Error'),
+            ),
+            FilledButton(
+              onPressed: () {
+                throw FlutterError('example unhandled exception');
+              },
+              child: const Text('Record unhandled Exception'),
+            ),
+          ],
         ),
       ),
     );
