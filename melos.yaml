@@ -42,8 +42,8 @@ scripts:
 
   analyze:
     run: |
-      melos run analyze:dart --no-select
-      melos run analyze:flutter --no-select
+      melos run analyze:dart --no-select && \
+      melos run analyze:flutter --no-select && \
       melos run analyze:custom_lint --no-select
     description: Run all analyze.
     packageFilters:
