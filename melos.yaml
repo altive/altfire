@@ -3,6 +3,7 @@ repository: https://github.com/altive/altfire
 
 packages:
   - packages/*
+  - example
 
 command:
   bootstrap:
