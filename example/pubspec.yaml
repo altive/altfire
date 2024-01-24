@@ -1,0 +1,26 @@
+name: example
+description: "altfire example app."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.0.0
+
+dependencies:
+  altfire_authenticator: ^0.1.0
+  altfire_configurator: ^0.1.0
+  altfire_messenger: ^0.1.0
+  flutter:
+    sdk: flutter
+  meta: ^1.10.0
+
+dev_dependencies:
+  altfire_lints: ^0.1.0
+  altive_lints: ^1.9.0
+  custom_lint: ^0.5.8
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.2
+
+
+flutter:
