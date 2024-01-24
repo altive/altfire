@@ -8,6 +8,9 @@ homepage: https://altive.dev
 repository: https://github.com/altive/altfire
 issue_tracker: https://github.com/altive/altfire/issues?q=is%3Aopen+is%3Aissue+label%3Aaltfire_messenger
 
+false_secrets:
+  - example/**
+
 environment:
   sdk: ^3.0.0
 
