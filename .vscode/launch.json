@@ -10,6 +10,13 @@
             "request": "launch",
             "type": "dart",
             "flutterMode": "debug"
+        },
+        {
+            "name": "altfire_tracker/example",
+            "cwd": "packages/altfire_tracker/example",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug"
         }
     ]
 }

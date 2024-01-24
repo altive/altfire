@@ -1,0 +1,22 @@
+name: altfire_tracker_example
+description: "Demonstrates how to use the altfire_tracker package. "
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.2.1 <4.0.0"
+
+dependencies:
+  altfire_tracker:
+    path: ../
+  firebase_core: ^2.24.2
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  altive_lints: ^1.9.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
