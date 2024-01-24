@@ -1,4 +1,4 @@
-package jp.co.altive.example
+package jp.co.altive.altfire_example
 
 import io.flutter.embedding.android.FlutterActivity
 
