@@ -2,7 +2,7 @@ name: altfire
 repository: https://github.com/altive/altfire
 
 packages:
-  - packages/*
+  - packages/**
 
 command:
   bootstrap:
