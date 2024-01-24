@@ -1,4 +1,4 @@
-import '../authenticator.dart';
+import '../altfire_authenticator.dart';
 
 extension UserExtension on User {
   bool get hasGoogleSigning => providerData.any(

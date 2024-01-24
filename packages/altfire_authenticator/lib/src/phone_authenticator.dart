@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../authenticator.dart';
+import '../altfire_authenticator.dart';
 import 'authenticatable.dart';
 
 class PhoneAuthenticator implements Authenticatable {
