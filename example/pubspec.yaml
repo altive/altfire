@@ -10,7 +10,7 @@ dependencies:
   altfire_authenticator: ^0.1.0
   altfire_configurator: ^0.1.0
   altfire_messenger: ^0.1.0
-  altfire_tracker: ^0.1.0
+  altfire_tracker: ^0.1.1
   flutter:
     sdk: flutter
   meta: ^1.10.0
