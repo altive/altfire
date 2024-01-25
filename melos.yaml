@@ -28,8 +28,6 @@ command:
     hooks:
       post: |
         melos exec --flutter -- "flutter clean"
-  version:
-    branch: main
 
 scripts:
   upgrade:
