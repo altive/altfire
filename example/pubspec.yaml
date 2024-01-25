@@ -7,16 +7,21 @@ environment:
   sdk: ^3.0.0
 
 dependencies:
-  altfire_authenticator: ^0.1.0
-  altfire_configurator: ^0.1.0
-  altfire_messenger: ^0.1.0
-  altfire_tracker: ^0.1.0
+  altfire_authenticator:
+    path: ../packages/altfire_authenticator
+  altfire_configurator:
+    path: ../packages/altfire_configurator
+  altfire_messenger:
+    path: ../packages/altfire_messenger
+  altfire_tracker:
+    path: ../packages/altfire_tracker
   flutter:
     sdk: flutter
   meta: ^1.10.0
 
 dev_dependencies:
-  altfire_lints: ^0.1.0
+  altfire_lints:
+    path: ../packages/altfire_lints
   altive_lints: ^1.9.0
   custom_lint: ^0.5.8
   flutter_test:
