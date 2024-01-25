@@ -23,11 +23,12 @@ command:
     dev_dependencies:
       altive_lints: ^1.9.0
       mocktail: ^1.0.2
-
   clean:
     hooks:
       post: |
         melos exec --flutter -- "flutter clean"
+  version:
+    workspaceChangelog: false
 
 scripts:
   upgrade:
