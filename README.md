@@ -1,5 +1,18 @@
 # Development
 
+## Release procedures for a altfire package.
+
+1. Create a branch for release.
+1. Run the `melos version` command.
+1. Commit the diff and create a pull request.
+1. Merge the pull request after review.
+1. Run the `melos publish` command on the `main` branch.
+
+```shell
+# Narrow down the target package as needed.
+melos version --scope=altfire_tracker
+```
+
 ## Add new example package
 
 ```shell
@@ -9,11 +22,10 @@ flutter create -e \
 packages/${PACKAGE_NAME}/example
 ```
 
-### Add dependencies to package
+### Add dependencies to example package
 
 ```shell
 flutter pub add firebase_core \
-firebase_analytics \
 '${PACKAGE_NAME}:{"path":"../"}' \
 dev:altive_lints 
 ```
@@ -34,4 +46,4 @@ include: package:altive_lints/altive_lints.yaml
 analyzer:
   exclude:
     - "lib/firebase_options.dart"
-``````
+```
