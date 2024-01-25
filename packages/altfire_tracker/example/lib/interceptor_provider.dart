@@ -24,7 +24,7 @@ class RecordErrorInterceptor extends Interceptor {
     DioException err,
     ErrorInterceptorHandler handler,
   ) async {
-    // Crashlyticsにログを送信
+    // Send logs to Crashlytics
     await Tracker().recordError(err, err.stackTrace);
     super.onError(err, handler);
   }
