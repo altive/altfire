@@ -1,5 +1,7 @@
 documentation:
-  - "**/*.md"
+  - changed-files:
+      - any-glob-to-any-file: "**/*.md"
 
 test:
-  - "**/test/**/*"
+  - changed-files:
+      - any-glob-to-any-file: "**/test/**/*"
