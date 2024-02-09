@@ -1,0 +1,143 @@
+{
+  "project_info": {
+    "project_number": "282061201204",
+    "project_id": "flutterfire-adapter",
+    "storage_bucket": "flutterfire-adapter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282061201204:android:689e9e8168561cfbb04f61",
+        "android_client_info": {
+          "package_name": "jp.co.altive.altfire_authenticator_example"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-QqWrVIJNsh-DOmV4OY4gVAi1jXW4e6s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282061201204:android:3459506a8aa4efd5b04f61",
+        "android_client_info": {
+          "package_name": "jp.co.altive.altfire_example"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-QqWrVIJNsh-DOmV4OY4gVAi1jXW4e6s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282061201204:android:32a9ba162980a7cdb04f61",
+        "android_client_info": {
+          "package_name": "jp.co.altive.altfire_messenger_example"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-QqWrVIJNsh-DOmV4OY4gVAi1jXW4e6s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282061201204:android:11ddbb198d0efbb8b04f61",
+        "android_client_info": {
+          "package_name": "jp.co.altive.altfire_tracker_example"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-QqWrVIJNsh-DOmV4OY4gVAi1jXW4e6s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282061201204:android:bcdcfb126cd82050b04f61",
+        "android_client_info": {
+          "package_name": "jp.co.altive.altfireconfigurator.example"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-QqWrVIJNsh-DOmV4OY4gVAi1jXW4e6s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282061201204:android:5a74909eebf13701b04f61",
+        "android_client_info": {
+          "package_name": "jp.co.altive.flutterfire_tracker_example"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-QqWrVIJNsh-DOmV4OY4gVAi1jXW4e6s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282061201204:android:86708a3c3a298e18b04f61",
+        "android_client_info": {
+          "package_name": "jp.co.altive.flutterfireremoteparameterfetcher.example"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-QqWrVIJNsh-DOmV4OY4gVAi1jXW4e6s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
