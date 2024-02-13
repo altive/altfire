@@ -66,8 +66,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '282061201204',
     projectId: 'flutterfire-adapter',
     storageBucket: 'flutterfire-adapter.appspot.com',
-    androidClientId: '282061201204-qtphfja1bc1jd5ilglloa69kidiljmsb.apps.googleusercontent.com',
-    iosClientId: '282061201204-76rb15ej06mpajec55rhh7lkhmcupb26.apps.googleusercontent.com',
+    androidClientId:
+        '282061201204-qtphfja1bc1jd5ilglloa69kidiljmsb.apps.googleusercontent.com',
+    iosClientId:
+        '282061201204-76rb15ej06mpajec55rhh7lkhmcupb26.apps.googleusercontent.com',
     iosBundleId: 'jp.co.altive.altfireAuthenticatorExample',
   );
 
@@ -77,8 +79,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '282061201204',
     projectId: 'flutterfire-adapter',
     storageBucket: 'flutterfire-adapter.appspot.com',
-    androidClientId: '282061201204-qtphfja1bc1jd5ilglloa69kidiljmsb.apps.googleusercontent.com',
-    iosClientId: '282061201204-3jci3ivgocsk6f8j04rviqanstio14oh.apps.googleusercontent.com',
+    androidClientId:
+        '282061201204-qtphfja1bc1jd5ilglloa69kidiljmsb.apps.googleusercontent.com',
+    iosClientId:
+        '282061201204-3jci3ivgocsk6f8j04rviqanstio14oh.apps.googleusercontent.com',
     iosBundleId: 'jp.co.altive.altfireAuthenticatorExample.RunnerTests',
   );
 }
