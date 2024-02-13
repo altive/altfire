@@ -27,17 +27,16 @@ class MainApp extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('Sign in with :', style: TextStyle(fontSize: 20)),
               FilledButton(
-                child: const Text('Google'),
+                child: const Text('Sign in with Google'),
                 onPressed: () async {
                   await authenticator.signInWithGoogle();
                 },
               ),
               FilledButton(
-                child: const Text('Apple'),
+                child: const Text('Sign out'),
                 onPressed: () async {
-                  await authenticator.signInWithApple();
+                  await authenticator.signOut();
                 },
               ),
             ],

@@ -12,7 +12,20 @@
           "package_name": "jp.co.altive.altfire_authenticator_example"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "282061201204-qtphfja1bc1jd5ilglloa69kidiljmsb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "jp.co.altive.altfire_authenticator_example",
+            "certificate_hash": "8d25504142df2c0a40e174da0fd0a152bf191b78"
+          }
+        },
+        {
+          "client_id": "282061201204-un4itu23f61mdhccu0vteshm0ci7ibju.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC-QqWrVIJNsh-DOmV4OY4gVAi1jXW4e6s"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282061201204-un4itu23f61mdhccu0vteshm0ci7ibju.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "282061201204-32gloipvlihoqafsubdj51a22ghpob87.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.co.altive.altfireExample.RunnerTests"
+              }
+            }
+          ]
         }
       }
     },
@@ -31,7 +56,12 @@
           "package_name": "jp.co.altive.altfire_example"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "282061201204-un4itu23f61mdhccu0vteshm0ci7ibju.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC-QqWrVIJNsh-DOmV4OY4gVAi1jXW4e6s"
@@ -39,7 +69,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282061201204-un4itu23f61mdhccu0vteshm0ci7ibju.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "282061201204-32gloipvlihoqafsubdj51a22ghpob87.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.co.altive.altfireExample.RunnerTests"
+              }
+            }
+          ]
         }
       }
     },
@@ -50,7 +92,12 @@
           "package_name": "jp.co.altive.altfire_messenger_example"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "282061201204-un4itu23f61mdhccu0vteshm0ci7ibju.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC-QqWrVIJNsh-DOmV4OY4gVAi1jXW4e6s"
@@ -58,7 +105,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282061201204-un4itu23f61mdhccu0vteshm0ci7ibju.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "282061201204-32gloipvlihoqafsubdj51a22ghpob87.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.co.altive.altfireExample.RunnerTests"
+              }
+            }
+          ]
         }
       }
     },
@@ -69,7 +128,12 @@
           "package_name": "jp.co.altive.altfire_tracker_example"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "282061201204-un4itu23f61mdhccu0vteshm0ci7ibju.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC-QqWrVIJNsh-DOmV4OY4gVAi1jXW4e6s"
@@ -77,7 +141,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282061201204-un4itu23f61mdhccu0vteshm0ci7ibju.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "282061201204-32gloipvlihoqafsubdj51a22ghpob87.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.co.altive.altfireExample.RunnerTests"
+              }
+            }
+          ]
         }
       }
     },
@@ -88,7 +164,12 @@
           "package_name": "jp.co.altive.altfireconfigurator.example"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "282061201204-un4itu23f61mdhccu0vteshm0ci7ibju.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC-QqWrVIJNsh-DOmV4OY4gVAi1jXW4e6s"
@@ -96,7 +177,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282061201204-un4itu23f61mdhccu0vteshm0ci7ibju.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "282061201204-32gloipvlihoqafsubdj51a22ghpob87.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.co.altive.altfireExample.RunnerTests"
+              }
+            }
+          ]
         }
       }
     },
@@ -107,7 +200,12 @@
           "package_name": "jp.co.altive.flutterfire_tracker_example"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "282061201204-un4itu23f61mdhccu0vteshm0ci7ibju.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC-QqWrVIJNsh-DOmV4OY4gVAi1jXW4e6s"
@@ -115,7 +213,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282061201204-un4itu23f61mdhccu0vteshm0ci7ibju.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "282061201204-32gloipvlihoqafsubdj51a22ghpob87.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.co.altive.altfireExample.RunnerTests"
+              }
+            }
+          ]
         }
       }
     },
@@ -126,7 +236,12 @@
           "package_name": "jp.co.altive.flutterfireremoteparameterfetcher.example"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "282061201204-un4itu23f61mdhccu0vteshm0ci7ibju.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC-QqWrVIJNsh-DOmV4OY4gVAi1jXW4e6s"
@@ -134,7 +249,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282061201204-un4itu23f61mdhccu0vteshm0ci7ibju.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "282061201204-32gloipvlihoqafsubdj51a22ghpob87.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.co.altive.altfireExample.RunnerTests"
+              }
+            }
+          ]
         }
       }
     }
