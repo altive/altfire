@@ -1,9 +1,7 @@
 import 'package:altfire_authenticator/altfire_authenticator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'authenticator_provider.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -11,23 +9,35 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   final authenticator = Authenticator();
   runApp(
-    ProviderScope(
-      overrides: [
-        authenticatorProvider.overrideWithValue(authenticator),
-      ],
-      child: const MainApp(),
+    MainApp(
+      authenticator: authenticator,
     ),
   );
 }
 
-class MainApp extends ConsumerWidget {
-  const MainApp({super.key});
+class MainApp extends StatefulWidget {
+  const MainApp({super.key, required this.authenticator});
+
+  final Authenticator authenticator;
+  @override
+  State<StatefulWidget> createState() => MainAppState();
+}
+
+class MainAppState extends State<MainApp> {
+  String? uid;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final authenticator = ref.watch(authenticatorProvider);
-    final uid = ref.watch(uidProvider);
+  void initState() {
+    widget.authenticator.userChanges.listen((user) {
+      setState(() {
+        uid = user?.uid;
+      });
+    });
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -35,17 +45,11 @@ class MainApp extends ConsumerWidget {
         ),
         body: uid == null
             ? Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FilledButton(
-                      child: const Text('Sign in with Google'),
-                      onPressed: () async {
-                        await authenticator.signInWithGoogle();
-                        ref.invalidate(uidProvider);
-                      },
-                    ),
-                  ],
+                child: ElevatedButton(
+                  child: const Text('Sign in with Google'),
+                  onPressed: () async {
+                    await widget.authenticator.signInWithGoogle();
+                  },
                 ),
               )
             : Center(
@@ -53,11 +57,10 @@ class MainApp extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('uid: $uid'),
-                    FilledButton(
+                    ElevatedButton(
                       child: const Text('Sign out'),
                       onPressed: () async {
-                        await authenticator.signOut();
-                        ref.invalidate(uidProvider);
+                        await widget.authenticator.signOut();
                       },
                     ),
                   ],
