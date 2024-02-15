@@ -24,6 +24,13 @@
             "request": "launch",
             "type": "dart",
             "flutterMode": "debug"
-        }
+        },
+        {
+            "name": "altfire_authenticator/example",
+            "cwd": "packages/altfire_authenticator/example",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug"
+        },
     ]
 }
