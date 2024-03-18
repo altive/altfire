@@ -155,7 +155,7 @@ class Tracker {
   /// Send a screen view to Analytics.
   Future<void> trackScreenView(String screenName) async {
     await Future.wait([
-      _analytics.setCurrentScreen(screenName: screenName),
+      _analytics.logScreenView(screenName: screenName),
       ..._trackers.map((tracker) => tracker.trackScreenView(screenName)),
     ]);
   }
