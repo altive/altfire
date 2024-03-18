@@ -31,58 +31,14 @@ command:
     workspaceChangelog: false
 
 scripts:
-  upgrade:
-    run: |
-      melos exec -- \
-        "flutter pub upgrade --major-versions && flutter pub upgrade"
-    description: Run upgrade the major version of the pub.
-    packageFilters:
-      flutter: true
-      dirExists: lib
-
-  analyze:
-    run: |
-      melos run analyze:dart --no-select && \
-      melos run analyze:flutter --no-select && \
-      melos run analyze:custom_lint --no-select
-    description: Run all analyze.
-    packageFilters:
-      dirExists: lib
-
-  analyze:dart:
-    run: |
-      melos exec -- \
-        dart analyze . --fatal-infos
-    description: Run analyze.
-    packageFilters:
-      flutter: false
-      dirExists: lib
-
-  analyze:flutter:
-    run: |
-      melos exec -- \
-        flutter analyze . --fatal-infos
-    description: Run analyze.
-    packageFilters:
-      flutter: true
-      dirExists: lib
-
-  analyze:custom_lint:
-    run: |
-      melos exec -- \
-        dart run custom_lint
+  custom_lint:
+    exec: dart run custom_lint
     description: Run custom_lint.
     packageFilters:
       dependsOn: "custom_lint"
 
-  format:
-    run: |
-      melos exec -- \
-        dart format lib/
-    description: Run dart format.
-    packageFilters:
-      dirExists: lib
-
+  # Issue on file exclusion feature: https://github.com/dart-lang/dart_style/issues/864
+  # NOTE: Using the `exec:` format causes processing to stop
   format:ci:
     run: |
       melos exec -- \
@@ -92,25 +48,23 @@ scripts:
       dirExists: lib
 
   fix:
-    run: |
-      melos exec -- \
-        dart fix --apply lib
+    exec: dart fix --apply lib
     description: Run dart fix.
     packageFilters:
       dirExists: lib
 
   test:
-    run: |
-      melos exec --fail-fast -- \
-        flutter test
+    run: flutter test
+    exec:
+      failFast: true
     description: Run flutter test.
     packageFilters:
       dirExists: test
 
   test:ci:
-    run: |
-      melos exec --fail-fast -- \
-        flutter test --coverage
+    run: flutter test --coverage
+    exec:
+      failFast: true
     description: Run flutter test for CI.
     packageFilters:
       dirExists: test

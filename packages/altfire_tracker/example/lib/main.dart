@@ -22,6 +22,10 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       home: HomePage(tracker: tracker),
+      initialRoute: '/',
+      navigatorObservers: [
+        ...tracker.navigatorObservers(),
+      ],
     ),
   );
 }
@@ -70,6 +74,31 @@ class HomePage extends StatelessWidget {
                 throw FlutterError('example unhandled exception');
               },
               child: const Text('Record unhandled Exception'),
+            ),
+            FilledButton(
+              onPressed: () async {
+                await Navigator.of(context).push<void>(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return Scaffold(
+                        appBar: AppBar(
+                          title: const Text('Track Screen Page'),
+                        ),
+                        body: Center(
+                          child: FilledButton(
+                            onPressed: () {
+                              tracker.trackScreenView('/example');
+                            },
+                            child: const Text('Send Screen View Event'),
+                          ),
+                        ),
+                      );
+                    },
+                    settings: const RouteSettings(name: '/track'),
+                  ),
+                );
+              },
+              child: const Text('Track Screen'),
             ),
           ],
         ),

@@ -20,6 +20,16 @@ abstract interface class Trackable {
     bool fatal = false,
   });
 
+  /// Tracks an screen view.
+  ///
+  /// This method allows for logging of screen views within the application.
+  /// Screen views are typically logged when a new screen is displayed
+  /// to the user.
+  ///
+  /// Parameters:
+  ///  [screenName] - The name of the screen to track.
+  Future<void> trackScreenView(String screenName);
+
   /// Tracks an event.
   ///
   /// This method allows for logging of custom events within the application.
