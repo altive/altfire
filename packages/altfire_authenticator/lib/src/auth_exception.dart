@@ -1,15 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-/// 認証で発生したエラーを判別するためのエラークラス。
-/// FirebaseAuthExceptionから生成する。
+/// Error class for identifying errors that occur during authentication.
+/// Generated from FirebaseAuthException.
 sealed class AuthException implements Exception {
   factory AuthException.fromError(Object e) {
     if (e is! FirebaseAuthException) {
       return const AuthUndefinedError();
     }
     return switch (e.code) {
-      // Google認証でキャンセルした場合は「cancel」が返ってくる
-      // Apple認証でキャンセルした場合は「canceled」が返ってくる
+      // When Google authentication is cancelled, 'cancel' is returned.
+      // When Apple authentication is cancelled, 'canceled' is returned.
       'cancel' || 'canceled' => const AuthCancelled(),
       'requires-recent-login' => const AuthRequiresRecentSignIn(),
       'invalid-phone-number' => const AuthInvalidPhoneNumber(),
