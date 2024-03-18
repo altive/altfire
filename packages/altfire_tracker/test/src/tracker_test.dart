@@ -277,7 +277,7 @@ void main() {
 
       const screenName = 'screen';
       when(
-        () => analytics.setCurrentScreen(
+        () => analytics.logScreenView(
           screenName: screenName,
         ),
       ).thenAnswer((_) async {});
@@ -288,7 +288,7 @@ void main() {
       await tracker.trackScreenView(screenName);
 
       verify(
-        () => analytics.setCurrentScreen(
+        () => analytics.logScreenView(
           screenName: screenName,
         ),
       ).called(1);
