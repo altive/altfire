@@ -23,7 +23,7 @@ packages:
       path: "../packages/altfire_authenticator"
       relative: true
     source: path
-    version: "0.1.0"
+    version: "0.1.1"
   altfire_configurator:
     dependency: "direct main"
     description:
