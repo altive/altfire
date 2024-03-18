@@ -139,15 +139,25 @@ class Tracker {
   /// Returns a list of NavigatorObservers to register with Navigator.
   /// Use [nameExtractor] to set the parameter value to send.
   List<NavigatorObserver> navigatorObservers({
-    required String? Function(RouteSettings) nameExtractor,
+    String? Function(RouteSettings) nameExtractor = defaultNameExtractor,
+    bool Function(Route<dynamic>?) routeFilter = defaultRouteFilter,
   }) {
     return [
       // Returns a NavigatorObserver of FirebaseAnalytics.
       FirebaseAnalyticsObserver(
         analytics: _analytics,
         nameExtractor: nameExtractor,
+        routeFilter: routeFilter,
       ),
     ];
+  }
+
+  /// Send a screen view to Analytics.
+  Future<void> trackScreenView(String screenName) async {
+    await Future.wait([
+      _analytics.setCurrentScreen(screenName: screenName),
+      ..._trackers.map((tracker) => tracker.trackScreenView(screenName)),
+    ]);
   }
 
   /// Send an event to Analytics.

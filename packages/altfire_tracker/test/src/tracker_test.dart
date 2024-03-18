@@ -254,11 +254,47 @@ void main() {
       );
 
       String nameExtractor(RouteSettings settings) => settings.name!;
-      final got = tracker.navigatorObservers(nameExtractor: nameExtractor);
+      bool routerFilter(Route<dynamic>? route) => route != null;
+      final got = tracker.navigatorObservers(
+        nameExtractor: nameExtractor,
+        routeFilter: routerFilter,
+      );
 
       expect(got, isA<List<NavigatorObserver>>());
       expect(got.length, 1);
       expect(got[0], isA<FirebaseAnalyticsObserver>());
+    });
+
+    test('trackScreenView should call setCurrentScreen on analytics', () async {
+      final crashlytics = MockFirebaseCrashlytics();
+      final analytics = MockFirebaseAnalytics();
+      final trackable = MockTrackable();
+      final tracker = Tracker(
+        crashlytics: crashlytics,
+        analytics: analytics,
+        trackers: [trackable],
+      );
+
+      const screenName = 'screen';
+      when(
+        () => analytics.setCurrentScreen(
+          screenName: screenName,
+        ),
+      ).thenAnswer((_) async {});
+      when(
+        () => trackable.trackScreenView(screenName),
+      ).thenAnswer((_) async {});
+
+      await tracker.trackScreenView(screenName);
+
+      verify(
+        () => analytics.setCurrentScreen(
+          screenName: screenName,
+        ),
+      ).called(1);
+      verify(() => trackable.trackScreenView(screenName)).called(1);
+      verifyNoMoreInteractions(crashlytics);
+      verifyNoMoreInteractions(analytics);
     });
 
     test('logEvent should call logEvent on analytics and trackers', () async {
