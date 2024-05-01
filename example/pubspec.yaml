@@ -17,15 +17,15 @@ dependencies:
     path: ../packages/altfire_tracker
   flutter:
     sdk: flutter
-  meta: ^1.11.0
+  meta: ^1.10.0
 
 dev_dependencies:
   altfire_lints:
     path: ../packages/altfire_lints
-  altive_lints: ^1.10.0
-  custom_lint: ^0.6.4
+  altive_lints: ^1.9.0
+  custom_lint: ^0.5.8
   flutter_test:
     sdk: flutter
-  mocktail: ^1.0.3
+  mocktail: ^1.0.2
 
 flutter:

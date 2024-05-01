@@ -15,10 +15,10 @@ environment:
   sdk: ^3.0.0
 
 dependencies:
-  firebase_remote_config: ^4.4.4
-  meta: ^1.11.0
+  firebase_remote_config: ^4.3.3
+  meta: ^1.10.0
 
 dev_dependencies:
-  altive_lints: ^1.10.0
+  altive_lints: ^1.9.0
   flutter_test:
     sdk: flutter

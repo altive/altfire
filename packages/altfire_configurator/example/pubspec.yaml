@@ -9,16 +9,16 @@ environment:
 dependencies:
   altfire_configurator:
     path: ../
-  firebase_analytics: ^10.10.4
-  firebase_core: ^2.30.1
+  firebase_analytics: ^10.6.3
+  firebase_core: ^2.21.0
   flutter:
     sdk: flutter
 
 dev_dependencies:
   altfire_lints:
     path: ../../altfire_lints
-  altive_lints: ^1.10.0
-  custom_lint: ^0.6.4
+  altive_lints: ^1.9.0
+  custom_lint: ^0.5.7
 
 flutter:
   uses-material-design: true
