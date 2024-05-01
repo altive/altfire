@@ -23,35 +23,35 @@ packages:
       path: "../packages/altfire_authenticator"
       relative: true
     source: path
-    version: "0.1.1"
+    version: "0.1.2"
   altfire_configurator:
     dependency: "direct main"
     description:
       path: "../packages/altfire_configurator"
       relative: true
     source: path
-    version: "0.1.0"
+    version: "0.1.1"
   altfire_lints:
     dependency: "direct dev"
     description:
       path: "../packages/altfire_lints"
       relative: true
     source: path
-    version: "0.1.0"
+    version: "0.1.1"
   altfire_messenger:
     dependency: "direct main"
     description:
       path: "../packages/altfire_messenger"
       relative: true
     source: path
-    version: "0.1.0"
+    version: "0.1.1"
   altfire_tracker:
     dependency: "direct main"
     description:
       path: "../packages/altfire_tracker"
       relative: true
     source: path
-    version: "0.1.1"
+    version: "0.1.2"
   altive_lints:
     dependency: "direct dev"
     description:

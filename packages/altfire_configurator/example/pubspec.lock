@@ -23,14 +23,14 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.1.0"
+    version: "0.1.1"
   altfire_lints:
     dependency: "direct dev"
     description:
       path: "../../altfire_lints"
       relative: true
     source: path
-    version: "0.1.0"
+    version: "0.1.1"
   altive_lints:
     dependency: "direct dev"
     description:
