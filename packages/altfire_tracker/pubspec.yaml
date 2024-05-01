@@ -15,14 +15,14 @@ environment:
   sdk: ^3.0.0
 
 dependencies:
-  firebase_analytics: ^10.6.3
-  firebase_crashlytics: ^3.4.9
-  firebase_crashlytics_platform_interface: ^3.6.16
+  firebase_analytics: ^10.10.4
+  firebase_crashlytics: ^3.5.4
+  firebase_crashlytics_platform_interface: ^3.6.32
   flutter:
     sdk: flutter
 
 dev_dependencies:
-  altive_lints: ^1.9.0
+  altive_lints: ^1.10.0
   flutter_test:
     sdk: flutter
-  mocktail: ^1.0.2
+  mocktail: ^1.0.3
