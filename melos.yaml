@@ -85,7 +85,7 @@ scripts:
 
   pod:macos:
     description: Run pod install on macOS.
-    run: cd macos && pod install --repo-update
+    exec: cd macos && pod install --repo-update
     packageFilters:
       dirExists: [lib, macos]
       fileExists: "macos/Podfile"
