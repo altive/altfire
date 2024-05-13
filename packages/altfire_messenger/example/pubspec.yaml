@@ -9,7 +9,7 @@ environment:
 dependencies:
   altfire_messenger:
     path: ../
-  firebase_core: ^2.30.1
+  firebase_core: ^2.31.0
   flutter:
     sdk: flutter
 
