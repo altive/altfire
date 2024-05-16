@@ -10,13 +10,6 @@ command:
     runPubGetInParallel: true
     environment:
       sdk: ^3.0.0
-    dependencies:
-      collection: ^1.18.0
-      meta: ^1.11.0
-    dev_dependencies:
-      altive_lints: ^1.10.0
-      custom_lint: ^0.6.4
-      mocktail: ^1.0.3
   clean:
     hooks:
       post: |
