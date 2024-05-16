@@ -7,58 +7,32 @@ updates:
     schedule:
       interval: "monthly"
   - package-ecosystem: "pub"
-    directory: "/"
+    directories:
+      - "/"
+      - "/example"
+      - "/packages/altfire_authenticator"
+      - "/packages/altfire_authenticator/example"
+      - "/packages/altfire_configurator"
+      - "/packages/altfire_configurator/example"
+      - "/packages/altfire_lints"
+      - "/packages/altfire_lints/example"
+      - "/packages/altfire_lints_test"
+      - "/packages/altfire_lints_test/example"
+      - "/packages/altfire_messenger"
+      - "/packages/altfire_messenger/example"
+      - "/packages/altfire_tracker"
+      - "/packages/altfire_tracker/example"
     schedule:
       interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/example"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/packages/altfire_authenticator"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/packages/altfire_authenticator/example"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/packages/altfire_configurator"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/packages/altfire_configurator/example"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/packages/altfire_lints"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/packages/altfire_lints/example"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/packages/altfire_lints_test"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/packages/altfire_lints_test/example"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/packages/altfire_messenger"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/packages/altfire_messenger/example"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/packages/altfire_tracker"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "pub"
-    directory: "/packages/altfire_tracker/example"
-    schedule:
-      interval: "weekly"
+    groups:
+      altfire-dependencies:
+        patterns:
+          - "altfire_*"
+      firebase-dependencies:
+        patterns:
+          - "firebase_*"
+      dependencies-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
