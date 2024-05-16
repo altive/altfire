@@ -12,13 +12,6 @@ command:
       sdk: ^3.0.0
     dependencies:
       collection: ^1.18.0
-      firebase_analytics: ^10.10.4
-      firebase_auth: ^4.19.4
-      firebase_core: ^2.30.1
-      firebase_crashlytics: ^3.5.4
-      firebase_in_app_messaging: ^0.7.5+4
-      firebase_messaging: ^14.9.1
-      firebase_remote_config: ^4.4.4
       meta: ^1.11.0
     dev_dependencies:
       altive_lints: ^1.10.0
