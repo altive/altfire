@@ -1,5 +1,5 @@
 /// altfire_authenticator with FlutterFire Authentication.
-library altfire_authenticator;
+library;
 
 export 'package:firebase_auth/firebase_auth.dart'
     show

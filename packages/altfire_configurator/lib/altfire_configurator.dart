@@ -1,5 +1,5 @@
 /// altfire_configurator with FlutterFire Remote Config.
-library altfire_configurator;
+library;
 
 export 'src/config.dart';
 export 'src/configurator.dart';
