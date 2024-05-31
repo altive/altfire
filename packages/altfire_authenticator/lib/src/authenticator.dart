@@ -145,6 +145,17 @@ class Authenticator {
     }
   }
 
+  /// Reauthenticate with Apple.
+  /// Used to revoke the Apple user token.
+  Future<UserCredential> reauthenticateWithApple() async {
+    return _appleAuth.reauthenticate();
+  }
+
+  /// Revokes the Apple user token.
+  Future<void> revokeTokenWithAuthorizationCode(String code) async {
+    await _auth.revokeTokenWithAuthorizationCode(code);
+  }
+
   /// Changes this instance to point to an Auth emulator running locally.
   Future<void> useEmulator(String host, int port) =>
       _auth.useAuthEmulator(host, port);
