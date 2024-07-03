@@ -163,7 +163,7 @@ class Tracker {
   /// Send an event to Analytics.
   Future<void> logEvent(
     String eventName, {
-    Map<String, Object?>? parameters,
+    Map<String, Object>? parameters,
   }) async {
     await Future.wait([
       _analytics.logEvent(

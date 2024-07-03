@@ -6,6 +6,7 @@ environment:
 
 dependencies:
   altfire_configurator:
+    path: ../altfire_configurator
   flutter:
     sdk: flutter
 
@@ -16,7 +17,3 @@ dev_dependencies:
   custom_lint: ^0.6.4
   flutter_test:
     sdk: flutter
-
-dependency_overrides:
-  altfire_configurator:
-    path: ../altfire_configurator
