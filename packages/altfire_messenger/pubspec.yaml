@@ -15,8 +15,8 @@ environment:
   sdk: ^3.0.0
 
 dependencies:
-  firebase_in_app_messaging: ^0.7.5+4
-  firebase_messaging: ^14.9.1
+  firebase_in_app_messaging: ^0.8.0+2
+  firebase_messaging: ^15.0.2
   flutter:
     sdk: flutter
 
@@ -24,4 +24,4 @@ dev_dependencies:
   altive_lints: ^1.10.0
   flutter_test:
     sdk: flutter
-  mocktail: ^1.0.3
+  mocktail: ^1.0.4

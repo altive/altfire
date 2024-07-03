@@ -10,13 +10,13 @@ dependencies:
   altfire_tracker:
     path: ../
   dio: ^5.4.3+1
-  firebase_core: ^2.31.0
+  firebase_core: ^3.1.1
   flutter:
     sdk: flutter
 
 dev_dependencies:
   altive_lints: ^1.10.0
-  firebase_core_platform_interface: ^5.0.0
+  firebase_core_platform_interface: ^5.1.0
   flutter_test:
     sdk: flutter
   mockito: ^5.4.4
