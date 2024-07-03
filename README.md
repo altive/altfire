@@ -4,7 +4,7 @@
 
 1. Create a branch for release.
 1. Run the `melos version` command.
-1. Run the `git push --follow-tags` command. Push the changes and the created tags.
+1. Run the `git push origin release --follow-tags` command. Push the changes and the created tags.
 1. Create a pull request for the pushed branch.
 1. Merge the pull request after review.
 1. Run the `melos publish` command on the `main` branch.

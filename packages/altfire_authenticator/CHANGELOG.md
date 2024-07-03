@@ -1,3 +1,7 @@
+## 0.1.4
+
+ - Update a dependency to the latest release.
+
 ## 0.1.3
 
  - **FEAT**(authenticator): Publish the function to revoke the Apple user token ([#91](https://github.com/altive/altfire/issues/91)). ([2824952d](https://github.com/altive/altfire/commit/2824952d4ecd3aa7bb4729febd15a9609d59da0a))

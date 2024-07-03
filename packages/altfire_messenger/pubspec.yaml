@@ -3,7 +3,7 @@ description: |
   altfire_messenger is a package wrapping FlutterFire Messaging, Local Notifications, Firebase In-App Messaging, and Firebase Instance ID.
   It was created to make Firebase SDK versioning and methods easier to use.
   It is recommended to use the various altfire packages as a set.
-version: 0.1.1
+version: 0.1.2
 homepage: https://altive.dev
 repository: https://github.com/altive/altfire
 issue_tracker: https://github.com/altive/altfire/issues?q=is%3Aopen+is%3Aissue+label%3Aaltfire_messenger
