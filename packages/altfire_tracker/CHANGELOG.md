@@ -1,3 +1,7 @@
+## 0.1.3
+
+ - Update a dependency to the latest release.
+
 ## 0.1.2
 
  - **FIX**: Export MethodChannelFirebaseCrashlytics from firebase_crashlytics_platform_interface ([#66](https://github.com/altive/altfire/issues/66)). ([37b831c5](https://github.com/altive/altfire/commit/37b831c5dece4bb58c2d44478a5bfb774bcd58c3))
