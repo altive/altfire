@@ -244,6 +244,26 @@ void main() {
       verifyNoMoreInteractions(analytics);
     });
 
+    test('navigatorObserver should return a FirebaseAnalyticsObserver',
+        () async {
+      final crashlytics = MockFirebaseCrashlytics();
+      final analytics = MockFirebaseAnalytics();
+      final tracker = Tracker(
+        crashlytics: crashlytics,
+        analytics: analytics,
+      );
+
+      String nameExtractor(RouteSettings settings) => settings.name!;
+      bool routerFilter(Route<dynamic>? route) => route != null;
+      final got = tracker.navigatorObserver(
+        nameExtractor: nameExtractor,
+        routeFilter: routerFilter,
+      );
+
+      expect(got, isA<NavigatorObserver>());
+      expect(got, isA<FirebaseAnalyticsObserver>());
+    });
+
     test('navigatorObservers should return a list of NavigatorObservers',
         () async {
       final crashlytics = MockFirebaseCrashlytics();
@@ -261,8 +281,10 @@ void main() {
       );
 
       expect(got, isA<List<NavigatorObserver>>());
-      expect(got.length, 1);
-      expect(got[0], isA<FirebaseAnalyticsObserver>());
+      expect(
+        got.whereType<FirebaseAnalyticsObserver>(),
+        hasLength(1),
+      );
     });
 
     test('trackScreenView should call setCurrentScreen on analytics', () async {

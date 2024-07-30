@@ -136,16 +136,27 @@ class Tracker {
     }
   }
 
-  /// Returns a list of NavigatorObservers to register with Navigator.
+  /// Returns a FirebaseAnalyticsObserver as NavigatorObserver.
+  /// Use [nameExtractor] to set the parameter value to send.
+  NavigatorObserver navigatorObserver({
+    String? Function(RouteSettings) nameExtractor = defaultNameExtractor,
+    bool Function(Route<dynamic>?) routeFilter = defaultRouteFilter,
+  }) {
+    return FirebaseAnalyticsObserver(
+      analytics: _analytics,
+      nameExtractor: nameExtractor,
+      routeFilter: routeFilter,
+    );
+  }
+
+  /// Returns a list of NavigatorObservers with FirebaseAnalyticsObserver.
   /// Use [nameExtractor] to set the parameter value to send.
   List<NavigatorObserver> navigatorObservers({
     String? Function(RouteSettings) nameExtractor = defaultNameExtractor,
     bool Function(Route<dynamic>?) routeFilter = defaultRouteFilter,
   }) {
     return [
-      // Returns a NavigatorObserver of FirebaseAnalytics.
-      FirebaseAnalyticsObserver(
-        analytics: _analytics,
+      navigatorObserver(
         nameExtractor: nameExtractor,
         routeFilter: routeFilter,
       ),
