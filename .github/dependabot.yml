@@ -14,15 +14,3 @@ updates:
       - "/packages/*/example"
     schedule:
       interval: "weekly"
-    groups:
-      altfire-dependencies:
-        patterns:
-          - "altfire_*"
-      firebase-dependencies:
-        patterns:
-          - "firebase_*"
-      dependencies-patch:
-        patterns:
-          - "*"
-        update-types:
-          - "patch"
