@@ -15,8 +15,8 @@ environment:
   sdk: ^3.0.0
 
 dependencies:
-  firebase_in_app_messaging: ^0.8.0+2
-  firebase_messaging: ^15.0.2
+  firebase_in_app_messaging: ^0.8.0+3
+  firebase_messaging: ^15.0.3
   flutter:
     sdk: flutter
 
