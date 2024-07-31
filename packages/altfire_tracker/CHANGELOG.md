@@ -1,3 +1,7 @@
+## 0.1.4
+
+ - **FEAT**(tracker): Add one navigator observer ([#96](https://github.com/altive/altfire/issues/96)). ([f95ca053](https://github.com/altive/altfire/commit/f95ca0535b456fc7800a35175511848fa741be15))
+
 ## 0.1.3
 
  - Update a dependency to the latest release.
