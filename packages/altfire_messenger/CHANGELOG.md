@@ -1,3 +1,7 @@
+## 0.2.0
+
+ - **FEAT**: Add a set of methods to receive notifications ([#99](https://github.com/altive/altfire/issues/99)). ([f6d8e10a](https://github.com/altive/altfire/commit/f6d8e10a0f39db0b756581ff09621e20fd892154))
+
 ## 0.1.3
 
  - Update a dependency to the latest release.
