@@ -3,6 +3,6 @@
 library;
 
 export 'package:firebase_messaging/firebase_messaging.dart'
-    show AuthorizationStatus;
+    show AuthorizationStatus, RemoteMessage;
 
 export 'src/messenger.dart';

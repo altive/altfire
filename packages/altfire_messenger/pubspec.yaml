@@ -19,6 +19,8 @@ dependencies:
   firebase_messaging: ^15.0.3
   flutter:
     sdk: flutter
+  flutter_local_notifications: ^17.2.2
+  timezone: ^0.9.4
 
 dev_dependencies:
   altive_lints: ^1.10.0
