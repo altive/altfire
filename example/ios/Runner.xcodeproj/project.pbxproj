@@ -107,7 +107,6 @@
 				8D8443D365C781F873729DEE /* Pods-RunnerTests.release.xcconfig */,
 				67330DF6F7C535B20A359515 /* Pods-RunnerTests.profile.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -313,7 +312,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$PODS_ROOT/FirebaseCrashlytics/upload-symbols\" --flutter-project \"$PROJECT_DIR/firebase_app_id_file.json\" ";
+			shellScript = "\"$PODS_ROOT/FirebaseCrashlytics/upload-symbols\" --flutter-project \"$PROJECT_DIR/firebase_app_id_file.json\" \n";
 		};
 		92B07AD91E29D07338B6C917 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
