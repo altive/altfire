@@ -74,14 +74,14 @@ scripts:
 
   pod:ios:
     description: Run pod install on iOS.
-    exec: cd ios && pod install --repo-update
+    exec: cd ios && rm -f Podfile.lock && pod install --repo-update
     packageFilters:
       dirExists: [lib, ios]
       fileExists: "ios/Podfile"
 
   pod:macos:
     description: Run pod install on macOS.
-    exec: cd macos && pod install --repo-update
+    exec: cd macos && rm -f Podfile.lock && pod install --repo-update
     packageFilters:
       dirExists: [lib, macos]
       fileExists: "macos/Podfile"
