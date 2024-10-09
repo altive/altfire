@@ -1,3 +1,7 @@
+## 0.1.6
+
+ - Upddate minimum SDK version to iOS 15.5.0 and macOS 10.15
+
 ## 0.1.5
 
  - Update a dependency to the latest release.
