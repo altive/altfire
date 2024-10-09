@@ -1,3 +1,8 @@
+## 0.1.5
+
+ - Update dependencies to the latest release.
+ - Update minimum SDK version to iOS 15.5.0 and macOS 10.15.
+
 ## 0.1.4
 
  - **FEAT**(tracker): Add one navigator observer ([#96](https://github.com/altive/altfire/issues/96)). ([f95ca053](https://github.com/altive/altfire/commit/f95ca0535b456fc7800a35175511848fa741be15))

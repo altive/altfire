@@ -1,3 +1,8 @@
+## 0.2.1
+
+ - Update dependencies to the latest release.
+ - Update minimum SDK version to iOS 15.5.0 and macOS 10.15.
+
 ## 0.2.0
 
  - **FEAT**: Add a set of methods to receive notifications ([#99](https://github.com/altive/altfire/issues/99)). ([f6d8e10a](https://github.com/altive/altfire/commit/f6d8e10a0f39db0b756581ff09621e20fd892154))

@@ -12,6 +12,13 @@
 ```shell
 # Narrow down the target package as needed.
 melos version --scope=altfire_tracker
+
+# Specify the version manually, if necessary.
+melos version \
+--manual-version altfire_authenticator:0.1.6 \
+--manual-version altfire_configurator:0.1.4 \
+--manual-version altfire_messenger:0.2.1 \
+--manual-version altfire_tracker:0.1.5 \
 ```
 
 ## Add new example package
