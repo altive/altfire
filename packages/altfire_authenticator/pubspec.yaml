@@ -1,12 +1,10 @@
 name: altfire_authenticator
 description: |
-  altfire_authenticator is a package wrapping FlutterFire Authentication.
-  It was created to make Firebase SDK versioning and methods easier to use.
-  It is recommended to use the various altfire packages as a set.
+  Provides a wrapper class for FlutterFire Authentication package to simplify its usage.
 version: 0.1.6
 homepage: https://altive.dev
 repository: https://github.com/altive/altfire
-issue_tracker: https://github.com/altive/altfire/issues?q=is%3Aopen+is%3Aissue+label%3Aaltfire_authenticator
+issue_tracker: https://github.com/altive/altfire/labels/altfire_authenticator
 
 false_secrets:
   - example/**

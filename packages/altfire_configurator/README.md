@@ -2,6 +2,9 @@
 
 Provides a wrapper class for the FlutterFire RemoteConfig package to simplify its usage.
 
+It was created to make Firebase SDK versioning and methods easier to use.
+It is recommended to use the various altfire packages as a set.
+
 ## Getting started
 
 ```yaml
