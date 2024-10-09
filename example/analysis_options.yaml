@@ -4,3 +4,9 @@ analyzer:
     - custom_lint
   exclude:
     - "lib/firebase_options.dart"
+custom_lint:
+  rules:
+    - avoid_hardcoded_color: false
+linter:
+  rules:
+    public_member_api_docs: false
