@@ -5,12 +5,12 @@ import 'dart:async';
 class Config<T> {
   Config({
     required T value,
-    required StreamSubscription<void> subscription,
+    required StreamSubscription<void>? subscription,
   })  : _value = value,
         _subscription = subscription;
 
   /// The subscription to the stream of updated parameter information.
-  final StreamSubscription<void> _subscription;
+  final StreamSubscription<void>? _subscription;
 
   /// The current value of the parameter.
   T get value => _value;
@@ -18,6 +18,6 @@ class Config<T> {
 
   /// Closes the [Config].
   Future<void> dispose() async {
-    await _subscription.cancel();
+    await _subscription?.cancel();
   }
 }

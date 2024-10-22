@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/foundation.dart';
 
 import 'config.dart';
 
-typedef ValueChanged<T> = void Function(T value);
+typedef _ValueChanged<T> = void Function(T value);
 
 /// A class that wraps Remote Config.
 /// Its role is to "fetch the configured parameters from remote and provide
@@ -13,6 +13,7 @@ typedef ValueChanged<T> = void Function(T value);
 ///
 /// Exposes [fetchAndActivate] and configuration methods for Remote Config.
 class Configurator {
+  /// If [rc] is null, a singleton instance of [FirebaseRemoteConfig] is used.
   Configurator({
     FirebaseRemoteConfig? rc,
   }) : _rc = rc ?? FirebaseRemoteConfig.instance;
@@ -116,84 +117,96 @@ class Configurator {
   /// Returns a [Config] of type [String].
   Config<String> getStringConfig(
     String key, {
-    required ValueChanged<String> onConfigUpdated,
+    _ValueChanged<String>? onConfigUpdated,
   }) {
     return Config<String>(
       value: getString(key),
-      subscription: filteredOnConfigUpdated(key).listen((event) async {
-        await activate();
-        onConfigUpdated(getString(key));
-      }),
+      subscription: kIsWeb || onConfigUpdated == null
+          ? null
+          : filteredOnConfigUpdated(key).listen((event) async {
+              await activate();
+              onConfigUpdated(getString(key));
+            }),
     );
   }
 
   /// Returns a [Config] of type [int].
   Config<int> getIntConfig(
     String key, {
-    required ValueChanged<int> onConfigUpdated,
+    _ValueChanged<int>? onConfigUpdated,
   }) {
     return Config<int>(
       value: getInt(key),
-      subscription: filteredOnConfigUpdated(key).listen((event) async {
-        await activate();
-        onConfigUpdated(getInt(key));
-      }),
+      subscription: kIsWeb || onConfigUpdated == null
+          ? null
+          : filteredOnConfigUpdated(key).listen((event) async {
+              await activate();
+              onConfigUpdated(getInt(key));
+            }),
     );
   }
 
   /// Returns a [Config] of type [double].
   Config<double> getDoubleConfig(
     String key, {
-    required ValueChanged<double> onConfigUpdated,
+    _ValueChanged<double>? onConfigUpdated,
   }) {
     return Config<double>(
       value: getDouble(key),
-      subscription: filteredOnConfigUpdated(key).listen((event) async {
-        await activate();
-        onConfigUpdated(getDouble(key));
-      }),
+      subscription: kIsWeb || onConfigUpdated == null
+          ? null
+          : filteredOnConfigUpdated(key).listen((event) async {
+              await activate();
+              onConfigUpdated(getDouble(key));
+            }),
     );
   }
 
   /// Returns a [Config] of type [bool].
   Config<bool> getBoolConfig(
     String key, {
-    required ValueChanged<bool> onConfigUpdated,
+    _ValueChanged<bool>? onConfigUpdated,
   }) {
     return Config<bool>(
       value: getBool(key),
-      subscription: filteredOnConfigUpdated(key).listen((event) async {
-        await activate();
-        onConfigUpdated(getBool(key));
-      }),
+      subscription: kIsWeb || onConfigUpdated == null
+          ? null
+          : filteredOnConfigUpdated(key).listen((event) async {
+              await activate();
+              onConfigUpdated(getBool(key));
+            }),
     );
   }
 
   /// Returns a [Config] of type [Map].
   Config<Map<String, Object?>> getJsonConfig(
     String key, {
-    required ValueChanged<Map<String, Object?>> onConfigUpdated,
+    _ValueChanged<Map<String, Object?>>? onConfigUpdated,
   }) {
     return Config<Map<String, Object?>>(
       value: getJson(key),
-      subscription: filteredOnConfigUpdated(key).listen((event) async {
-        await activate();
-        onConfigUpdated(getJson(key));
-      }),
+      subscription: kIsWeb || onConfigUpdated == null
+          ? null
+          : filteredOnConfigUpdated(key).listen((event) async {
+              await activate();
+              onConfigUpdated(getJson(key));
+            }),
     );
   }
 
   /// Returns a [Config] of type [List] of [Map].
   Config<List<Map<String, Object?>>> getListJsonConfig(
     String key, {
-    required ValueChanged<List<Map<String, Object?>>> onConfigUpdated,
+    _ValueChanged<List<Map<String, Object?>>>? onConfigUpdated,
   }) {
     return Config<List<Map<String, Object?>>>(
       value: getListJson(key),
-      subscription: filteredOnConfigUpdated(key).listen((event) async {
-        await activate();
-        onConfigUpdated(getListJson(key));
-      }),
+      subscription: kIsWeb || onConfigUpdated == null
+          ? null
+          : filteredOnConfigUpdated(key).listen((event) async {
+              await activate();
+              onConfigUpdated(getListJson(key));
+            }),
     );
   }
 
@@ -201,14 +214,16 @@ class Configurator {
   Config<T> getDataConfig<T extends Object>(
     String key, {
     required T Function(Map<String, Object?>) fromJson,
-    required ValueChanged<T> onConfigUpdated,
+    _ValueChanged<T>? onConfigUpdated,
   }) {
     return Config<T>(
       value: getData<T>(key: key, fromJson: fromJson),
-      subscription: filteredOnConfigUpdated(key).listen((event) async {
-        await activate();
-        onConfigUpdated(getData(key: key, fromJson: fromJson));
-      }),
+      subscription: kIsWeb || onConfigUpdated == null
+          ? null
+          : filteredOnConfigUpdated(key).listen((event) async {
+              await activate();
+              onConfigUpdated(getData(key: key, fromJson: fromJson));
+            }),
     );
   }
 }
