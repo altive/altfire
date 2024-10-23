@@ -1,3 +1,9 @@
+## 1.0.0
+
+ - Released v1.0.0
+
+ - **FIX**(configurator): Fix configurator web unsupported error ([#105](https://github.com/altive/altfire/issues/105)). ([8cf7de9e](https://github.com/altive/altfire/commit/8cf7de9e3a20876e2f36edcafb08f7960dbc2408))
+
 ## 0.1.4
 
  - Update dependencies to the latest release.
