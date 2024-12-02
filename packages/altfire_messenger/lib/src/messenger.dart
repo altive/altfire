@@ -11,6 +11,7 @@ import 'package:timezone/data/latest.dart' as tz;
 /// It exposes methods for sending and receiving notifications, displaying
 /// in-app messages, and managing settings related to these functions.
 class Messenger {
+  /// Creates a new instance of Messenger.
   Messenger({
     FirebaseMessaging? messaging,
     FlutterLocalNotificationsPlugin? notifications,
@@ -55,7 +56,8 @@ class Messenger {
 
   /// Activated when a message is tapped and the app is opened.
   ///
-  /// This listener handles the event when the app is brought to foreground via a notification tap.
+  /// This listener handles the event when the app is brought to foreground
+  /// via a notification tap.
   void onMessageOpenedApp(ValueChanged<RemoteMessage> onData) {
     FirebaseMessaging.onMessageOpenedApp.listen(onData);
   }
@@ -69,14 +71,17 @@ class Messenger {
     FirebaseMessaging.onBackgroundMessage(handler);
   }
 
-  /// Returns the initial message when the app is opened from a terminated state.
+  /// Returns the initial message when the app is opened
+  /// from a terminated state.
   ///
-  /// This is useful for handling messages that were received while the app was closed.
+  /// This is useful for handling messages that were received
+  /// while the app was closed.
   Future<RemoteMessage?> getInitialMessage() {
     return _messaging.getInitialMessage();
   }
 
-  /// Returns the latest FCM token that can be used for device specific messages.
+  /// Returns the latest FCM token that can be used
+  /// for device specific messages.
   Future<String?> getToken() {
     return _messaging.getToken();
   }
@@ -143,7 +148,8 @@ class Messenger {
 
   /// Executes when a notification is tapped while the app is in the foreground.
   ///
-  /// Parses the payload to JSON and triggers the provided callback with the data.
+  /// Parses the payload to JSON and triggers the provided
+  /// callback with the data.
   @visibleForTesting
   Future<void> onForegroundNotificationTapped({
     required NotificationResponse notificationResponse,
@@ -159,7 +165,8 @@ class Messenger {
 
   /// Displays a notification with customizable settings.
   ///
-  /// Can specify the notification channel, description, icon, and color among others.
+  /// Can specify the notification channel, description, icon,
+  /// and color among others.
   Future<void> showNotification({
     required String channelId,
     required String channelName,
@@ -181,9 +188,9 @@ class Messenger {
       color: color,
     );
 
-    final iOSPlatformChannelSpecifics = DarwinNotificationDetails();
+    const iOSPlatformChannelSpecifics = DarwinNotificationDetails();
 
-    final macOSPlatformChannelSpecifics = DarwinNotificationDetails();
+    const macOSPlatformChannelSpecifics = DarwinNotificationDetails();
 
     final platformChannelSpecifics = NotificationDetails(
       android: androidPlatformChannelSpecifics,

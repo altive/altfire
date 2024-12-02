@@ -15,7 +15,8 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
-  altive_lints: ^1.10.0
+  altive_lints: ^1.16.0
+  custom_lint: ^0.7.0
   firebase_core_platform_interface: ^5.1.0
   flutter_test:
     sdk: flutter

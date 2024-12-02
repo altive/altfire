@@ -4,12 +4,26 @@ import 'package:google_sign_in/google_sign_in.dart';
 import '../altfire_authenticator.dart';
 import 'authenticatable.dart';
 
+/// GoogleAuthenticator is a class that implements the Authenticatable interface
+/// to provide authentication using Google Sign-In with Firebase.
+///
+/// This class handles the authentication process for Google Sign-In, including
+/// signing in, reauthenticating, linking, and unlinking the Google provider.
+///
+/// It uses the FirebaseAuth instance to perform authentication operations.
+///
+/// Example usage:
+/// ```dart
+/// final googleAuthenticator = GoogleAuthenticator(FirebaseAuth.instance);
+/// final userCredential = await googleAuthenticator.signIn();
+/// ```
 class GoogleAuthenticator implements Authenticatable {
+  /// Creates a new instance of GoogleAuthenticator with
   GoogleAuthenticator(this._auth);
 
   final FirebaseAuth _auth;
 
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final _googleSignIn = GoogleSignIn();
 
   User get _user => _auth.currentUser!;
 

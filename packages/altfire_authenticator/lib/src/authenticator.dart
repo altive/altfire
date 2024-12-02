@@ -8,6 +8,7 @@ import 'phone_authenticator.dart';
 
 /// [Authenticator] is a wrapper class for [FirebaseAuth].
 class Authenticator {
+  /// Creates a new instance of [Authenticator].
   Authenticator({
     FirebaseAuth? auth,
     AppleAuthenticator? appleAuthenticator,
@@ -141,7 +142,7 @@ class Authenticator {
     } else if (_appleAuth.alreadySigned) {
       return _appleAuth.reauthenticate();
     } else {
-      throw UnimplementedError('未対応のSigningMethodがあります。');
+      throw UnimplementedError('Reauthentication is not implemented.');
     }
   }
 

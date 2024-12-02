@@ -4,38 +4,52 @@ import 'package:flutter/foundation.dart';
 import '../altfire_authenticator.dart';
 import 'authenticatable.dart';
 
+/// AppleAuthenticator is a class that implements the Authenticatable interface
+/// to provide authentication using Apple Sign-In with Firebase.
+///
+/// This class handles the authentication process for Apple Sign-In, including
+/// signing in, reauthenticating, linking, and unlinking the Apple provider.
+///
+/// It uses the FirebaseAuth instance to perform authentication operations.
+///
+/// Example usage:
+/// ```dart
+/// final appleAuthenticator = AppleAuthenticator(FirebaseAuth.instance);
+/// final userCredential = await appleAuthenticator.signIn();
+/// ```
 class AppleAuthenticator implements Authenticatable {
+  /// Creates a new instance of AppleAuthenticator with
+  /// the provided FirebaseAuth instance.
   AppleAuthenticator(this._auth);
 
   final FirebaseAuth _auth;
 
-  final authProvider = AppleAuthProvider();
+  final _authProvider = AppleAuthProvider();
 
   User get _user => _auth.currentUser!;
 
-  /// 既にAppleでサインイン済みなら`true`
   @override
   bool get alreadySigned => _auth.currentUser?.hasAppleSigning ?? false;
 
   @override
   Future<UserCredential> signIn([AuthCredential? credential]) async {
     if (kIsWeb) {
-      final userCredential = await _auth.signInWithPopup(authProvider);
+      final userCredential = await _auth.signInWithPopup(_authProvider);
       return userCredential;
     } else {
-      final userCredential = await _auth.signInWithProvider(authProvider);
+      final userCredential = await _auth.signInWithProvider(_authProvider);
       return userCredential;
     }
   }
 
   @override
   Future<UserCredential> reauthenticate([AuthCredential? credential]) async {
-    return _auth.currentUser!.reauthenticateWithProvider(authProvider);
+    return _auth.currentUser!.reauthenticateWithProvider(_authProvider);
   }
 
   @override
   Future<UserCredential> link([AuthCredential? credential]) async {
-    return _user.linkWithProvider(authProvider);
+    return _user.linkWithProvider(_authProvider);
   }
 
   @override

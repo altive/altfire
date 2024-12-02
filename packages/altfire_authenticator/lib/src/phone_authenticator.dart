@@ -3,18 +3,47 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../altfire_authenticator.dart';
 import 'authenticatable.dart';
 
+/// PhoneAuthenticator is a class that implements the Authenticatable interface
+/// to provide authentication using phone number verification with Firebase.
+///
+/// This class handles the authentication process for phone number verification,
+/// including verifying the phone number, signing in, reauthenticating, linking,
+/// and unlinking the phone provider.
+///
+/// It uses the FirebaseAuth instance to perform authentication operations.
+///
+/// Example usage:
+/// ```dart
+/// final phoneAuthenticator = PhoneAuthenticator(FirebaseAuth.instance);
+/// await phoneAuthenticator.verifyPhoneNumber(
+///   phoneNumber: '+1234567890',
+///   verificationCompleted: (credential) async {
+///     final userCredential = await phoneAuthenticator.signIn(credential);
+///   },
+///   verificationFailed: (exception) {
+///     print('Failed to verify phone number: $exception');
+///   },
+///   codeSent: (verificationId, forceResendingToken) {
+///     print('Verification code sent to phone number');
+///   },
+///   codeAutoRetrievalTimeout: (verificationId) {
+///     print('Verification code auto-retrieval timed out');
+///   },
+/// );
+/// ```
 class PhoneAuthenticator implements Authenticatable {
+  /// Creates a new instance of PhoneAuthenticator with
+  /// the provided FirebaseAuth instance.
   PhoneAuthenticator(this._auth);
 
   final FirebaseAuth _auth;
 
   User get _user => _auth.currentUser!;
 
-  /// 既に電話番号でサインイン済みなら`true`
   @override
   bool get alreadySigned => _auth.currentUser?.hasPhoneSigning ?? false;
 
-  /// 電話番号を検証し認証コードを送信する。
+  /// Verifies the phone number and sends a verification code.
   Future<void> verifyPhoneNumber({
     required String phoneNumber,
     required void Function(PhoneAuthCredential credential)
@@ -33,7 +62,6 @@ class PhoneAuthenticator implements Authenticatable {
     );
   }
 
-  /// SMS認証コードを使ってサインインする。
   @override
   Future<UserCredential> signIn([AuthCredential? credential]) async {
     if (credential == null) {
@@ -42,7 +70,6 @@ class PhoneAuthenticator implements Authenticatable {
     return _auth.signInWithCredential(credential);
   }
 
-  /// 電話番号認証で再認証する。
   @override
   Future<UserCredential> reauthenticate([AuthCredential? credential]) {
     if (credential == null) {
@@ -51,7 +78,6 @@ class PhoneAuthenticator implements Authenticatable {
     return _user.reauthenticateWithCredential(credential);
   }
 
-  /// 電話番号認証を連携する。
   @override
   Future<UserCredential> link([AuthCredential? credential]) {
     if (credential == null) {
@@ -60,7 +86,6 @@ class PhoneAuthenticator implements Authenticatable {
     return _user.linkWithCredential(credential);
   }
 
-  /// 電話番号認証の連携を解除する。
   @override
   Future<User> unlink() {
     return _user.unlink(SigningMethod.phone.providerId);

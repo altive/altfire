@@ -1,30 +1,36 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
+/// Interface for authenticatable classes.
+///
+/// This interface defines the methods required for authentication operations
+/// such as sign-in, reauthentication, linking, and unlinking.
+///
+/// Implementing classes should provide concrete implementations for methods.
 abstract class Authenticatable {
-  /// すでにサインイン済みかどうか。
+  /// Whether the user is already signed in.
   bool get alreadySigned;
 
-  /// サインイン。
+  /// Signs in the user.
   ///
-  /// 電話番号認証ではサインイン処理が2STEPに分かれており、
-  /// [AuthCredential]を外から渡す必要があるため、
-  /// オプショナル引数として[AuthCredential]を受け取る形にしている。
+  /// For phone number authentication, the sign-in process is divided into
+  /// two steps, and an [AuthCredential] needs to be provided from outside.
+  /// Therefore, it is accepted as an optional argument.
   Future<UserCredential> signIn([AuthCredential? credential]);
 
-  /// 再認証する。
+  /// Reauthenticates the user.
   ///
-  /// 電話番号認証ではサインイン処理が2STEPに分かれており、
-  /// [AuthCredential]を外から渡す必要があるため、
-  /// オプショナル引数として[AuthCredential]を受け取る形にしている。
+  /// For phone number authentication, the reauthentication process is divided
+  /// into two steps, and an [AuthCredential] needs to be provided from outside.
+  /// Therefore, it is accepted as an optional argument.
   Future<UserCredential> reauthenticate([AuthCredential? credential]);
 
-  /// ユーザーにAppleを紐付ける。
+  /// Links the user with an Apple account.
   ///
-  /// 電話番号認証ではサインイン処理が2STEPに分かれており、
-  /// [AuthCredential]を外から渡す必要があるため、
-  /// オプショナル引数として[AuthCredential]を受け取る形にしている。
+  /// For phone number authentication, the linking process is divided into
+  /// two steps, and an [AuthCredential] needs to be provided from outside.
+  /// Therefore, it is accepted as an optional argument.
   Future<UserCredential> link([AuthCredential? credential]);
 
-  /// Apple IDをリンク解除。
+  /// Unlinks the user's Apple ID.
   Future<User> unlink();
 }

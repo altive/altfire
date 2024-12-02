@@ -1,1 +1,3 @@
 include: ../../../example/analysis_options.yaml
+exclude:
+  - "**/firebase_options_*.dart"
