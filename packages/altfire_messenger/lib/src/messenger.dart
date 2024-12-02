@@ -120,8 +120,6 @@ class Messenger {
       requestAlertPermission: requestAlertPermission,
       requestBadgePermission: requestBadgePermission,
       requestSoundPermission: requestSoundPermission,
-      // This property is only applicable to iOS versions older than 10.
-      onDidReceiveLocalNotification: onDidReceiveLocalNotification,
     );
 
     final macOSInitializationSettings = DarwinInitializationSettings(
