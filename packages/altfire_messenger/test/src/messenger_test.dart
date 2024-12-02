@@ -22,7 +22,7 @@ void main() {
   group('Messenger', () {
     setUpAll(() {
       registerFallbackValue(
-        InitializationSettings(
+        const InitializationSettings(
           android: AndroidInitializationSettings(''),
           iOS: DarwinInitializationSettings(
             requestAlertPermission: false,
@@ -65,7 +65,7 @@ void main() {
     });
 
     test(
-        'getNotificationSettings should call getNotificationSettings on messaging',
+        '''getNotificationSettings should call getNotificationSettings on messaging''',
         () async {
       final messaging = MockFirebaseMessaging();
       final messenger = Messenger(messaging: messaging);
@@ -131,11 +131,13 @@ void main() {
         notifications: notifications,
       );
 
-      when(() => notifications.initialize(
-            any(),
-            onDidReceiveNotificationResponse:
-                any(named: 'onDidReceiveNotificationResponse'),
-          )).thenAnswer((_) async => true);
+      when(
+        () => notifications.initialize(
+          any(),
+          onDidReceiveNotificationResponse:
+              any(named: 'onDidReceiveNotificationResponse'),
+        ),
+      ).thenAnswer((_) async => true);
 
       await messenger.initializeNotifications(
         androidDefaultIcon: 'test_icon',
@@ -147,11 +149,18 @@ void main() {
       verify(
         () => notifications.initialize(
           any(
-            that: predicate((InitializationSettings settings) =>
-                settings.android?.defaultIcon == 'test_icon' &&
-                settings.iOS?.requestAlertPermission == true &&
-                settings.iOS?.requestBadgePermission == true &&
-                settings.iOS?.requestSoundPermission == true),
+            that: predicate(
+              (InitializationSettings settings) {
+                final iosSettings = settings.iOS;
+                if (iosSettings == null) {
+                  return false;
+                }
+                return settings.android?.defaultIcon == 'test_icon' &&
+                    iosSettings.requestAlertPermission &&
+                    iosSettings.requestBadgePermission &&
+                    iosSettings.requestSoundPermission;
+              },
+            ),
           ),
           onDidReceiveNotificationResponse:
               any(named: 'onDidReceiveNotificationResponse'),
@@ -168,17 +177,15 @@ void main() {
         notifications: notifications,
       );
       final mockResponse = MockNotificationResponse();
-      final mockPayload = '{"key": "value"}';
+      const mockPayload = '{"key": "value"}';
 
       when(() => mockResponse.payload).thenReturn(mockPayload);
 
       final completer = Completer<Map<String, dynamic>>();
 
-      messenger.onForegroundNotificationTapped(
+      await messenger.onForegroundNotificationTapped(
         notificationResponse: mockResponse,
-        onNotificationTapped: (map) {
-          completer.complete(map);
-        },
+        onNotificationTapped: completer.complete,
       );
 
       final result = await completer.future;
@@ -193,19 +200,23 @@ void main() {
         notifications: notifications,
       );
 
-      when(() => notifications.show(
-            any(),
-            any(),
-            any(),
-            any(),
-            payload: any(named: 'payload'),
-          )).thenAnswer((_) async {});
+      when(
+        () => notifications.show(
+          any(),
+          any(),
+          any(),
+          any(),
+          payload: any(named: 'payload'),
+        ),
+      ).thenAnswer((_) async {});
 
       await messenger.showNotification(
         channelId: 'test_channel',
         channelName: 'Test Channel',
         channelDescription: 'Test Description',
         icon: 'test_icon',
+        // For testing purposes, we use a hardcoded color.
+        // ignore: avoid_hardcoded_color
         color: const Color(0xFF000000),
         id: 1,
         title: 'Test Title',
@@ -213,13 +224,15 @@ void main() {
         payloadJsonMap: {'key': 'value'},
       );
 
-      verify(() => notifications.show(
-            1,
-            'Test Title',
-            'Test Body',
-            any(),
-            payload: any(named: 'payload'),
-          )).called(1);
+      verify(
+        () => notifications.show(
+          1,
+          'Test Title',
+          'Test Body',
+          any(),
+          payload: any(named: 'payload'),
+        ),
+      ).called(1);
     });
   });
 }

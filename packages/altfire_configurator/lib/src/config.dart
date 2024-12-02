@@ -3,6 +3,7 @@ import 'dart:async';
 /// A class that holds the value of a parameter fetched from a remote.
 /// It also provides a Stream of updated parameter information.
 class Config<T> {
+  /// Creates a new instance of [Config].
   Config({
     required T value,
     required StreamSubscription<void>? subscription,

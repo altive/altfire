@@ -27,6 +27,9 @@ Podfile
 postbootstrap
 postclean
 pubspec
+Reauthenticates
+reauthenticating
+reauthentication
 Reorderable
 revenuecat
 riverpod

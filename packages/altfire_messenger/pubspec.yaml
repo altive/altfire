@@ -21,7 +21,8 @@ dependencies:
   timezone: ^0.9.4
 
 dev_dependencies:
-  altive_lints: ^1.10.0
+  altive_lints: ^1.16.0
+  custom_lint: ^0.7.0
   flutter_test:
     sdk: flutter
   mocktail: ^1.0.4

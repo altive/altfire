@@ -65,24 +65,28 @@ class Configurator {
     return onConfigUpdated.where((config) => config.updatedKeys.contains(key));
   }
 
+  /// Get the value of the parameter of type [String].
   @visibleForTesting
   String getString(String key) {
     final value = _rc.getString(key);
     return value;
   }
 
+  /// Get the value of the parameter of type [int].
   @visibleForTesting
   int getInt(String key) {
     final value = _rc.getInt(key);
     return value;
   }
 
+  /// Get the value of the parameter of type [double].
   @visibleForTesting
   double getDouble(String key) {
     final value = _rc.getDouble(key);
     return value;
   }
 
+  /// Get the value of the parameter of type [bool].
   @visibleForTesting
   bool getBool(String key) {
     final value = _rc.getBool(key);

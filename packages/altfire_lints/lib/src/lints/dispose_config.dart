@@ -5,6 +5,7 @@ import 'package:custom_lint_builder/custom_lint_builder.dart';
 
 /// LintRule to ensure that Config instances are disposed.
 class DisposeConfig extends DartLintRule {
+  /// Default constructor.
   const DisposeConfig() : super(code: _code);
 
   static const _code = LintCode(
@@ -90,7 +91,7 @@ class DisposeConfig extends DartLintRule {
         }
 
         if (!isDisposed) {
-          reporter.reportErrorForNode(_code, field);
+          reporter.atNode(field, _code);
         }
       }
     });
@@ -138,7 +139,7 @@ class DisposeConfig extends DartLintRule {
           }
         }
         if (!isDisposed) {
-          reporter.reportErrorForNode(_code, node);
+          reporter.atNode(node, _code);
         }
       }
     });

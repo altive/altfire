@@ -12,6 +12,7 @@ import 'trackable.dart';
 ///
 /// It exposes methods for sending analytic events and for configuration.
 class Tracker {
+  /// Create a Tracker instance.
   Tracker({
     FirebaseCrashlytics? crashlytics,
     FirebaseAnalytics? analytics,
