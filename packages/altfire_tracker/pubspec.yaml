@@ -12,9 +12,9 @@ environment:
   sdk: ^3.0.0
 
 dependencies:
-  firebase_analytics: ^11.3.3
-  firebase_crashlytics: ^4.1.3
-  firebase_crashlytics_platform_interface: ^3.6.44
+  firebase_analytics: ^11.3.5
+  firebase_crashlytics: ^4.1.5
+  firebase_crashlytics_platform_interface: ^3.6.46
   flutter:
     sdk: flutter
 
