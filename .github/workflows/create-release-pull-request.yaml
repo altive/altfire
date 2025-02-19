@@ -18,8 +18,8 @@ on:
           - altfire_tracker
 
 jobs:
-  prepare-release:
-    name: Prepare release
+  set-version-and-branch:
+    name: Set version and branch name
     runs-on: ubuntu-latest
     outputs:
       changed_packages: ${{ steps.get-changed-packages.outputs.packages }}
@@ -47,6 +47,8 @@ jobs:
             melos version --patch --no-private --yes
           fi
 
+          git push origin --tags
+
           CHANGED_PACKAGES=$(git diff --name-only | grep "packages/.*/pubspec.yaml" | cut -d '/' -f2 | sort | uniq)
 
           if [[ -z "$CHANGED_PACKAGES" ]]; then
@@ -65,37 +67,33 @@ jobs:
   create-branch:
     name: Create release branch
     runs-on: ubuntu-latest
-    needs: [prepare-release]
-    env:
-      branch: ${{ needs.prepare-release.outputs.branch_name }}
+    needs: [set-version-and-branch]
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check if branch already exists
+      - name: Create or update release branch
+        env:
+          BRANCH_NAME: ${{ needs.set-version-and-branch.outputs.branch_name }}
         run: |
-          if git ls-remote --exit-code --heads origin ${{ env.branch }}; then
-            echo "branch_exists=true" >> "$GITHUB_ENV"
+          git fetch origin $BRANCH_NAME || true
+          if git ls-remote --exit-code --heads origin $BRANCH_NAME; then
+            git checkout $BRANCH_NAME
           else
-            echo "branch_exists=false" >> "$GITHUB_ENV"
+            git switch -c $BRANCH_NAME
+            git push origin $BRANCH_NAME
           fi
-
-      - name: Create release branch
-        if: env.branch_exists == 'false'
-        run: |
-          git switch -c ${{ env.branch }}
-          git push origin ${{ env.branch }}
 
   create-pr:
     name: Create Release Pull Request
     runs-on: ubuntu-latest
-    needs: [prepare-release, create-branch]
-    if: needs.prepare-release.outputs.changed_packages != ''
+    needs: [set-version-and-branch, create-branch]
+    if: needs.set-version-and-branch.outputs.changed_packages != ''
     permissions:
       contents: write
       pull-requests: write
     env:
-      branch: ${{ needs.prepare-release.outputs.branch_name }}
-      packages: ${{ needs.prepare-release.outputs.changed_packages }}
+      BRANCH_NAME: ${{ needs.set-version-and-branch.outputs.branch_name }}
+      PACKAGES: ${{ needs.set-version-and-branch.outputs.changed_packages }}
     steps:
       - uses: actions/checkout@v4
 
@@ -112,10 +110,9 @@ jobs:
         run: |
           PR_TITLE="chore(release): publish packages"
           PR_BODY="This pull request updates the following packages:\n\n"
-          for PACKAGE in $packages; do
+          for PACKAGE in $PACKAGES; do
             VERSION=$(grep -m 1 'version:' packages/$PACKAGE/pubspec.yaml | awk '{print $2}')
             PR_BODY+=" - \`$PACKAGE\`: \`$VERSION\`\n"
           done
 
-          echo "Creating PR with title: $PR_TITLE"
-          gh pr create -B "main" -H "$branch" -t "$PR_TITLE" -b "$PR_BODY" -a "$GITHUB_ACTOR"
+          gh pr create -B "main" -H "$BRANCH_NAME" -t "$PR_TITLE" -b "$PR_BODY" -a "$GITHUB_ACTOR"
