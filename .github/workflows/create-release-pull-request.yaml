@@ -91,9 +91,6 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    env:
-      BRANCH_NAME: "${{ needs.set-version-and-branch.outputs.branch_name }}"
-      PACKAGES: "${{ needs.set-version-and-branch.outputs.changed_packages }}"
     steps:
       - uses: actions/checkout@v4
 
@@ -106,13 +103,18 @@ jobs:
 
       - name: Create release PR
         env:
-          GITHUB_TOKEN: "${{ steps.generate_token.outputs.token }}"
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+          BRANCH_NAME: ${{ needs.set-version-and-branch.outputs.branch_name }}
+          PACKAGES: ${{ needs.set-version-and-branch.outputs.changed_packages }}
         run: |
           PR_TITLE="chore(release): publish packages"
           PR_BODY="This pull request updates the following packages:\n\n"
-          for PACKAGE in "$PACKAGES"; do
-            VERSION=$(grep -m 1 'version:' "packages/$PACKAGE/pubspec.yaml" | awk '{print $2}')
-            PR_BODY+=" - \`$PACKAGE\`: \`$VERSION\`\n"
-          done
+
+          if [[ -n "$PACKAGES" ]]; then
+            for PACKAGE in $PACKAGES; do
+              VERSION=$(grep -m 1 'version:' packages/$PACKAGE/pubspec.yaml | awk '{print $2}')
+              PR_BODY+=" - \`$PACKAGE\`: \`$VERSION\`\n"
+            done
+          fi
 
           gh pr create -B "main" -H "$BRANCH_NAME" -t "$PR_TITLE" -b "$PR_BODY" -a "$GITHUB_ACTOR"
