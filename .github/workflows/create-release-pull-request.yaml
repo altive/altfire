@@ -21,6 +21,7 @@ jobs:
   set-version-and-branch:
     name: Set version and branch name
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     outputs:
       changed_packages: ${{ steps.get-changed-packages.outputs.packages }}
       branch_name: ${{ steps.set-branch-name.outputs.branch }}
