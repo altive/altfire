@@ -1,0 +1,120 @@
+name: Create Release Pull Request
+
+on:
+  workflow_dispatch:
+    inputs:
+      scope:
+        description: >
+          Select a package to release (optional).
+          If not selected, only packages with changes will be included.
+        required: false
+        type: choice
+        options:
+          - altfire_authenticator
+          - altfire_configurator
+          - altfire_lints
+          - altfire_messenger
+          - altfire_tracker
+
+jobs:
+  set-version-and-branch:
+    name: Set version and branch name
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    outputs:
+      changed_packages: ${{ steps.get-changed-packages.outputs.packages }}
+      branch_name: ${{ steps.set-branch-name.outputs.branch }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Dart
+        uses: dart-lang/setup-dart@v1
+
+      - name: Install Melos
+        run: dart pub global activate melos
+
+      - name: Bootstrap Melos
+        run: melos bootstrap
+
+      - name: Run `melos version`
+        id: get-changed-packages
+        env:
+          MELOS_ALLOW_DIRTY: "true"
+        run: |
+          if [[ -n "${{ github.event.inputs.scope }}" ]]; then
+            melos version --no-private --yes --scope="${{ github.event.inputs.scope }}"
+          else
+            melos version --no-private --yes
+          fi
+
+          git push origin --tags
+
+          CHANGED_PACKAGES=$(git diff --name-only | grep "packages/.*/pubspec.yaml" | cut -d '/' -f2 | sort | uniq)
+
+          if [[ -z "$CHANGED_PACKAGES" ]]; then
+            echo "No package changes detected."
+            exit 0
+          fi
+
+          echo "packages=$CHANGED_PACKAGES" >> "$GITHUB_OUTPUT"
+
+      - name: Set branch name
+        id: set-branch-name
+        run: |
+          BRANCH_NAME="release/$(date +"%Y-%m-%d")"
+          echo "branch=$BRANCH_NAME" >> "$GITHUB_OUTPUT"
+
+  create-branch:
+    name: Create release branch
+    runs-on: ubuntu-latest
+    needs: [set-version-and-branch]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create or update release branch
+        env:
+          BRANCH_NAME: "${{ needs.set-version-and-branch.outputs.branch_name }}"
+        run: |
+          git fetch origin "$BRANCH_NAME" || true
+          if git ls-remote --exit-code --heads origin "$BRANCH_NAME"; then
+            git switch "$BRANCH_NAME"
+          else
+            git switch -c "$BRANCH_NAME"
+            git push origin "$BRANCH_NAME"
+          fi
+
+  create-pr:
+    name: Create Release Pull Request
+    runs-on: ubuntu-latest
+    needs: [set-version-and-branch, create-branch]
+    if: needs.set-version-and-branch.outputs.changed_packages != ''
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate GitHub App token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.app-id }}
+          private-key: ${{ secrets.private-key }}
+
+      - name: Create release PR
+        env:
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+          BRANCH_NAME: ${{ needs.set-version-and-branch.outputs.branch_name }}
+          PACKAGES: ${{ needs.set-version-and-branch.outputs.changed_packages }}
+        run: |
+          PR_TITLE="chore(release): publish packages"
+          PR_BODY="This pull request updates the following packages:\n\n"
+
+          IFS=' ' read -r -a PACKAGE_ARRAY <<< "${{ env.PACKAGES }}"
+
+          for PACKAGE in "${PACKAGE_ARRAY[@]}"; do
+            VERSION=$(grep -m 1 'version:' "packages/$PACKAGE/pubspec.yaml" | awk '{print $2}')
+            PR_BODY+=" - \`$PACKAGE\`: \`$VERSION\`\n"
+          done
+
+          gh pr create -B "main" -H "$BRANCH_NAME" -t "$PR_TITLE" -b "$PR_BODY" -a "$GITHUB_ACTOR"
