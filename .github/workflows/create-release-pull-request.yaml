@@ -110,7 +110,7 @@ jobs:
           PR_TITLE="chore(release): publish packages"
           PR_BODY="This pull request updates the following packages:\n\n"
 
-          IFS=' ' read -r -a PACKAGE_ARRAY <<< "$PACKAGES"
+          IFS=' ' read -r -a PACKAGE_ARRAY <<< "${{ env.PACKAGES }}"
 
           for PACKAGE in "${PACKAGE_ARRAY[@]}"; do
             VERSION=$(grep -m 1 'version:' "packages/$PACKAGE/pubspec.yaml" | awk '{print $2}')
