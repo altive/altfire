@@ -13,7 +13,6 @@ on:
           - altfire_authenticator
           - altfire_configurator
           - altfire_lints
-          - altfire_lints_test
           - altfire_messenger
           - altfire_tracker
 
