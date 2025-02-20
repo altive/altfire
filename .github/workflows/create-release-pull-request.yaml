@@ -110,11 +110,11 @@ jobs:
           PR_TITLE="chore(release): publish packages"
           PR_BODY="This pull request updates the following packages:\n\n"
 
-          if [[ -n "$PACKAGES" ]]; then
-            for PACKAGE in $PACKAGES; do
-              VERSION=$(grep -m 1 'version:' packages/$PACKAGE/pubspec.yaml | awk '{print $2}')
-              PR_BODY+=" - \`$PACKAGE\`: \`$VERSION\`\n"
-            done
-          fi
+          IFS=' ' read -r -a PACKAGE_ARRAY <<< "$PACKAGES"
+
+          for PACKAGE in "${PACKAGE_ARRAY[@]}"; do
+            VERSION=$(grep -m 1 'version:' "packages/$PACKAGE/pubspec.yaml" | awk '{print $2}')
+            PR_BODY+=" - \`$PACKAGE\`: \`$VERSION\`\n"
+          done
 
           gh pr create -B "main" -H "$BRANCH_NAME" -t "$PR_TITLE" -b "$PR_BODY" -a "$GITHUB_ACTOR"
