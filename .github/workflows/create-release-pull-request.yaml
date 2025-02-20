@@ -42,9 +42,9 @@ jobs:
           MELOS_ALLOW_DIRTY: "true"
         run: |
           if [[ -n "${{ github.event.inputs.scope }}" ]]; then
-            melos version --patch --no-private --yes --scope="${{ github.event.inputs.scope }}"
+            melos version --no-private --yes --scope="${{ github.event.inputs.scope }}"
           else
-            melos version --patch --no-private --yes
+            melos version --no-private --yes
           fi
 
           git push origin --tags
@@ -73,14 +73,14 @@ jobs:
 
       - name: Create or update release branch
         env:
-          BRANCH_NAME: ${{ needs.set-version-and-branch.outputs.branch_name }}
+          BRANCH_NAME: "${{ needs.set-version-and-branch.outputs.branch_name }}"
         run: |
-          git fetch origin $BRANCH_NAME || true
-          if git ls-remote --exit-code --heads origin $BRANCH_NAME; then
-            git checkout $BRANCH_NAME
+          git fetch origin "$BRANCH_NAME" || true
+          if git ls-remote --exit-code --heads origin "$BRANCH_NAME"; then
+            git switch "$BRANCH_NAME"
           else
-            git switch -c $BRANCH_NAME
-            git push origin $BRANCH_NAME
+            git switch -c "$BRANCH_NAME"
+            git push origin "$BRANCH_NAME"
           fi
 
   create-pr:
@@ -92,8 +92,8 @@ jobs:
       contents: write
       pull-requests: write
     env:
-      BRANCH_NAME: ${{ needs.set-version-and-branch.outputs.branch_name }}
-      PACKAGES: ${{ needs.set-version-and-branch.outputs.changed_packages }}
+      BRANCH_NAME: "${{ needs.set-version-and-branch.outputs.branch_name }}"
+      PACKAGES: "${{ needs.set-version-and-branch.outputs.changed_packages }}"
     steps:
       - uses: actions/checkout@v4
 
@@ -106,12 +106,12 @@ jobs:
 
       - name: Create release PR
         env:
-          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+          GITHUB_TOKEN: "${{ steps.generate_token.outputs.token }}"
         run: |
           PR_TITLE="chore(release): publish packages"
           PR_BODY="This pull request updates the following packages:\n\n"
-          for PACKAGE in $PACKAGES; do
-            VERSION=$(grep -m 1 'version:' packages/$PACKAGE/pubspec.yaml | awk '{print $2}')
+          for PACKAGE in "$PACKAGES"; do
+            VERSION=$(grep -m 1 'version:' "packages/$PACKAGE/pubspec.yaml" | awk '{print $2}')
             PR_BODY+=" - \`$PACKAGE\`: \`$VERSION\`\n"
           done
 
