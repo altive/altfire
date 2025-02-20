@@ -1,13 +1,26 @@
 # Development
 
-## Release procedures for a altfire package.
+## Release procedures for an altfire package
 
-1. Create a branch for release.
-1. Run the `melos version` command.
-1. Run the `git push origin release --follow-tags` command. Push the changes and the created tags.
-1. Create a pull request for the pushed branch.
-1. Merge the pull request after review.
-1. Run the `melos publish` command on the `main` branch.
+Releases are now automated using GitHub Actions. To create a release, follow these steps:
+
+1. Trigger the **Create Release Pull Request** workflow manually from GitHub Actions.
+   - If needed, select the package to release.
+   - If no package is selected, all modified packages will be included.
+2. Review the automatically generated release pull request and merge it after approval.
+3. Once the pull request is merged into `main`, the **Publish to pub.dev** workflow will be triggered automatically to publish the updated packages.
+
+### Manual release (if needed)
+
+<details>
+<summary>Click to expand manual release steps</summary>
+
+1. Create a branch for the release.
+2. Run the `melos version` command.
+3. Run `git push origin release --follow-tags` to push the changes and tags.
+4. Create a pull request for the pushed branch.
+5. Merge the pull request after review.
+6. Run the `melos publish` command on the `main` branch.
 
 ```shell
 # Narrow down the target package as needed.
@@ -20,6 +33,7 @@ melos version \
 --manual-version altfire_messenger:0.2.1 \
 --manual-version altfire_tracker:0.1.5 \
 ```
+</details>
 
 ## Add new example package
 
@@ -35,7 +49,7 @@ packages/${PACKAGE_NAME}/example
 ```shell
 flutter pub add firebase_core \
 '${PACKAGE_NAME}:{"path":"../"}' \
-dev:altive_lints 
+dev:altive_lints
 ```
 
 ### Configure FlutterFire
