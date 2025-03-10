@@ -7,8 +7,7 @@ environment:
   sdk: ^3.0.0
 
 dependencies:
-  altfire_tracker:
-    path: ../
+  altfire_tracker: any
   dio: ^5.5.0+1
   firebase_core: ^3.6.0
   flutter:

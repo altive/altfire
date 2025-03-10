@@ -5,14 +5,12 @@ environment:
   sdk: ^3.0.0
 
 dependencies:
-  altfire_configurator:
-    path: ../altfire_configurator
+  altfire_configurator: any
   flutter:
     sdk: flutter
 
 dev_dependencies:
-  altfire_lints:
-    path: ../altfire_lints
+  altfire_lints: any
   altive_lints: ^1.16.0
   custom_lint: ^0.7.0
   flutter_test:
