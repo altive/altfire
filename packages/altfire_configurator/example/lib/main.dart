@@ -25,7 +25,7 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  late final configurator = widget.configurator;
+  late final Configurator configurator = widget.configurator;
 
   late Config<int> _intConfig;
 
@@ -56,7 +56,7 @@ class _MainAppState extends State<MainApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: const Text('altfireconfigurator')),
+        appBar: AppBar(title: const Text('Altfire Configurator')),
         body: Padding(
           padding: const EdgeInsets.all(32),
           child: Center(
