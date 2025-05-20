@@ -1,6 +1,6 @@
 name: example
 description: "altfire example app."
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
@@ -16,7 +16,7 @@ dependencies:
 
 dev_dependencies:
   altfire_lints: any
-  altive_lints: ^1.16.0
-  custom_lint: ^0.7.0
+  altive_lints: any
+  custom_lint: any
   flutter_test:
     sdk: flutter
