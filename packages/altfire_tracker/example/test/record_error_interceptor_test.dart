@@ -44,6 +44,7 @@ void main() {
             'reason': null,
             'fatal': false,
             'buildId': '',
+            'loadingUnits': <String>[],
             'stackTraceElements': <Map<String, String>>[],
           },
         ),

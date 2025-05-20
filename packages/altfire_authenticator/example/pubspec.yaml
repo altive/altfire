@@ -7,8 +7,7 @@ environment:
   sdk: ^3.0.0
 
 dependencies:
-  altfire_authenticator:
-    path: ../
+  altfire_authenticator: any
   firebase_core: ^3.6.0
   flutter:
     sdk: flutter
