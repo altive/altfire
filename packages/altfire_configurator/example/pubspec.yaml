@@ -4,19 +4,21 @@ publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: ^3.0.0
+  sdk: ^3.6.0
+
+resolution: workspace
 
 dependencies:
-  altfire_configurator: any
-  firebase_analytics: ^11.3.3
-  firebase_core: ^3.6.0
+  altfire_configurator:
+  firebase_analytics: ^11.4.6
+  firebase_core: ^3.13.1
   flutter:
     sdk: flutter
 
 dev_dependencies:
-  altfire_lints: any
-  altive_lints: ^1.16.0
-  custom_lint: ^0.7.0
+  altfire_lints:
+  altive_lints: ^1.20.0
+  custom_lint: ^0.7.5
 
 flutter:
   uses-material-design: true

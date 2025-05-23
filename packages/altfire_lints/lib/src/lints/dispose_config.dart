@@ -99,7 +99,7 @@ class DisposeConfig extends DartLintRule {
     context.registry.addVariableDeclarationStatement((node) {
       final variables = node.variables.variables;
       for (final variable in variables) {
-        final variableType = variable.declaredElement?.type;
+        final variableType = variable.declaredFragment?.element.type;
         if (variableType == null) {
           continue;
         }

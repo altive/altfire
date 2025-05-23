@@ -2,16 +2,18 @@ name: altfire_lints_test
 publish_to: none
 
 environment:
-  sdk: ^3.0.0
+  sdk: ^3.6.0
+
+resolution: workspace
 
 dependencies:
-  altfire_configurator: any
+  altfire_configurator: ^1.0.0
   flutter:
     sdk: flutter
 
 dev_dependencies:
-  altfire_lints: any
-  altive_lints: ^1.16.0
-  custom_lint: ^0.7.0
+  altfire_lints: ^0.1.2
+  altive_lints: ^1.20.0
+  custom_lint: ^0.7.5
   flutter_test:
     sdk: flutter

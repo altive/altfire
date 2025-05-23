@@ -4,19 +4,21 @@ publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.0.0
+  sdk: ^3.6.0
+
+resolution: workspace
 
 dependencies:
-  altfire_authenticator: any
-  altfire_configurator: any
-  altfire_messenger: any
-  altfire_tracker: any
+  altfire_authenticator:
+  altfire_configurator:
+  altfire_messenger:
+  altfire_tracker:
   flutter:
     sdk: flutter
 
 dev_dependencies:
-  altfire_lints: any
-  altive_lints: any
-  custom_lint: any
+  altfire_lints:
+  altive_lints: ^1.20.0
+  custom_lint: ^0.7.5
   flutter_test:
     sdk: flutter

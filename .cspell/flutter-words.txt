@@ -2,11 +2,13 @@
 altool
 appbar
 appbundle
+bluefireteam
 Checkmark
 codecov
 codeowners
 codesign
 cupertino
+dorny
 dotenv
 draggable
 fastlane
@@ -35,6 +37,7 @@ revenuecat
 riverpod
 Routemaster
 Schyler
+subosito
 toggleable
 unawaited
 unfocus
