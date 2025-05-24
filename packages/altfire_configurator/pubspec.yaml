@@ -1,7 +1,7 @@
 name: altfire_configurator
 description: |
   Provides a wrapper class for the FlutterFire RemoteConfig package to simplify its usage.
-version: 1.0.0
+version: 1.0.1
 homepage: https://altive.dev
 repository: https://github.com/altive/altfire
 issue_tracker: https://github.com/altive/altfire/labels/altfire_configurator
