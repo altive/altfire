@@ -96,7 +96,7 @@ jobs:
 
       - name: Generate GitHub App token
         id: generate_token
-        uses: actions/create-github-app-token@v1
+        uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ secrets.app-id }}
           private-key: ${{ secrets.private-key }}
