@@ -21,9 +21,8 @@ workspace:
 
 melos:
   packages:
+    - example
     - packages/**
-  ignore:
-    - "packages/**/example"
   command:
     version:
       workspaceChangelog: false

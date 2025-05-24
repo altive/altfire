@@ -32,8 +32,9 @@ jobs:
 
       - name: Setup Melos
         uses: bluefireteam/melos-action@v3
-        with:
-          run-bootstrap: true
+
+      - name: Get dependencies
+        run: flutter pub get
 
       - name: Run `melos version`
         id: get-changed-packages
