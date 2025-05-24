@@ -36,7 +36,6 @@ jobs:
               - '**/test/**'
               - '**/web/**'
               - '**/analysis_options.yaml'
-              - '**/melos.yaml'
               - '**/pubspec.yaml'
 
   analyze:
@@ -50,18 +49,17 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          channel: "stable"
           cache: true
 
-      - name: Install Melos
-        uses: bluefireteam/melos-action@v3
+      - name: Get dependencies
+        run: flutter pub get
 
-      - name: Analyze packages
-        run: melos analyze
+      - name: Check format
+        run: dart format --set-exit-if-changed .
 
-      - name: Check for the existence of unformatted files
-        # Cannot use `melos format` as it requires excluding files generated from the target file
-        run: melos run format:ci --no-select
+      - name: Analyze
+        run: flutter analyze
 
   test:
     needs: check
@@ -74,17 +72,24 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          channel: "stable"
           cache: true
 
-      - name: Install Melos
-        uses: bluefireteam/melos-action@v3
+      - name: Get dependencies
+        run: flutter pub get
 
-      - name: Run package tests
-        run: melos run test:ci --no-select
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: coverage/lcov.info
+      - name: Run tests
+        run: |
+          if test -d "test"; then
+            if grep -q flutter "pubspec.yaml"; then
+              flutter test --coverage
+            else
+              dart pub global activate coverage
+              dart pub global run coverage:test_with_coverage
+            fi
+          fi
+      - name: Upload coverage to codecov
+        run: |
+          if test -d "test"; then
+            curl -s https://codecov.io/bash | bash
+          fi

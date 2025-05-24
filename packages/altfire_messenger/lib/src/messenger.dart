@@ -135,8 +135,8 @@ class Messenger {
         iOS: iOSInitializationSettings,
         macOS: macOSInitializationSettings,
       ),
-      onDidReceiveNotificationResponse: (response) {
-        onForegroundNotificationTapped(
+      onDidReceiveNotificationResponse: (response) async {
+        await onForegroundNotificationTapped(
           notificationResponse: response,
           onNotificationTapped: onNotificationTapped,
         );
