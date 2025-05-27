@@ -44,5 +44,6 @@ unfocus
 utsname
 vsync
 wireframe
+xcassets
 xcconfig
 xcrun
