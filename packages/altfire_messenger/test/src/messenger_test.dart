@@ -70,8 +70,9 @@ void main() {
     });
 
     test(
-        'requestPermission should call setForegroundNotificationPresentationOptions and requestPermission on messaging',
-        () async {
+        'requestPermission should call '
+        'setForegroundNotificationPresentationOptions'
+        'and requestPermission on messaging', () async {
       final messaging = MockFirebaseMessaging();
       final messenger = Messenger(messaging: messaging);
       final settings = MockNotificationSettings();
@@ -100,8 +101,8 @@ void main() {
     });
 
     test(
-        'getNotificationSettings should call getNotificationSettings on messaging',
-        () async {
+        'getNotificationSettings should call '
+        'getNotificationSettings on messaging', () async {
       final messaging = MockFirebaseMessaging();
       final messenger = Messenger(messaging: messaging);
       final settings = MockNotificationSettings();
@@ -149,9 +150,6 @@ void main() {
       final messaging = MockFirebaseMessaging();
       final messenger = Messenger(messaging: messaging);
 
-      // Test that the method exists and accepts the correct function signature
-      // Note: FirebaseMessaging.onBackgroundMessage is a static method with complex
-      // internal implementation that requires integration testing for full verification
       expect(
         messenger.onBackgroundMessage,
         isA<void Function(Future<void> Function(RemoteMessage))>(),
