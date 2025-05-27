@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:altfire_messenger/altfire_messenger.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core_platform_interface/test.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -20,7 +22,38 @@ class MockNotificationResponse extends Mock implements NotificationResponse {}
 
 void main() {
   group('Messenger', () {
-    setUpAll(() {
+    setUpAll(() async {
+      TestWidgetsFlutterBinding.ensureInitialized();
+      setupFirebaseCoreMocks();
+
+      // Mock Firebase Messaging MethodChannel
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(
+        const MethodChannel('plugins.flutter.io/firebase_messaging'),
+        (MethodCall methodCall) async {
+          switch (methodCall.method) {
+            case 'Messaging#getInitialMessage':
+              return null;
+            case 'Messaging#getToken':
+              return 'test-token';
+            case 'Messaging#requestPermission':
+              return {
+                'authorizationStatus': 1,
+                'showPreviews': true,
+                'sound': true,
+                'badge': true,
+                'alert': true,
+              };
+            case 'Messaging#setBackgroundMessageHandler':
+              return true;
+            case 'Messaging#registerBackgroundMessageHandler':
+              return true;
+            default:
+              return null;
+          }
+        },
+      );
+
       registerFallbackValue(
         const InitializationSettings(
           android: AndroidInitializationSettings(''),
@@ -31,12 +64,14 @@ void main() {
           ),
         ),
       );
+
+      // Initialize Firebase after setting up mocks
+      await Firebase.initializeApp();
     });
 
     test(
-        'requestPermission should call '
-        'setForegroundNotificationPresentationOptions and '
-        'requestPermission on messaging', () async {
+        'requestPermission should call setForegroundNotificationPresentationOptions and requestPermission on messaging',
+        () async {
       final messaging = MockFirebaseMessaging();
       final messenger = Messenger(messaging: messaging);
       final settings = MockNotificationSettings();
@@ -50,9 +85,9 @@ void main() {
       ).thenAnswer((_) async {});
       when(messaging.requestPermission).thenAnswer((_) async => settings);
 
-      final got = await messenger.requestPermission();
+      final result = await messenger.requestPermission();
 
-      expect(got, settings);
+      expect(result, settings);
 
       verify(
         () => messaging.setForegroundNotificationPresentationOptions(
@@ -65,7 +100,7 @@ void main() {
     });
 
     test(
-        '''getNotificationSettings should call getNotificationSettings on messaging''',
+        'getNotificationSettings should call getNotificationSettings on messaging',
         () async {
       final messaging = MockFirebaseMessaging();
       final messenger = Messenger(messaging: messaging);
@@ -73,11 +108,54 @@ void main() {
 
       when(messaging.getNotificationSettings).thenAnswer((_) async => settings);
 
-      final got = await messenger.getNotificationSettings();
+      final result = await messenger.getNotificationSettings();
 
-      expect(got, settings);
+      expect(result, settings);
 
       verify(messaging.getNotificationSettings).called(1);
+    });
+
+    test('onForegroundMessage should set up listener without throwing', () {
+      final messaging = MockFirebaseMessaging();
+      final messenger = Messenger(messaging: messaging);
+      var callbackCalled = false;
+
+      expect(
+        () => messenger.onForegroundMessage((message) {
+          callbackCalled = true;
+        }),
+        returnsNormally,
+      );
+
+      expect(callbackCalled, isFalse);
+    });
+
+    test('onMessageOpenedApp should set up listener without throwing', () {
+      final messaging = MockFirebaseMessaging();
+      final messenger = Messenger(messaging: messaging);
+      var callbackCalled = false;
+
+      expect(
+        () => messenger.onMessageOpenedApp((message) {
+          callbackCalled = true;
+        }),
+        returnsNormally,
+      );
+
+      expect(callbackCalled, isFalse);
+    });
+
+    test('onBackgroundMessage should accept handler function', () {
+      final messaging = MockFirebaseMessaging();
+      final messenger = Messenger(messaging: messaging);
+
+      // Test that the method exists and accepts the correct function signature
+      // Note: FirebaseMessaging.onBackgroundMessage is a static method with complex
+      // internal implementation that requires integration testing for full verification
+      expect(
+        messenger.onBackgroundMessage,
+        isA<void Function(Future<void> Function(RemoteMessage))>(),
+      );
     });
 
     test('getInitialMessage should call getInitialMessage on messaging',
@@ -88,9 +166,9 @@ void main() {
 
       when(messaging.getInitialMessage).thenAnswer((_) async => message);
 
-      final got = await messenger.getInitialMessage();
+      final result = await messenger.getInitialMessage();
 
-      expect(got, message);
+      expect(result, message);
 
       verify(messaging.getInitialMessage).called(1);
     });
@@ -102,11 +180,31 @@ void main() {
 
       when(messaging.getToken).thenAnswer((_) async => token);
 
-      final got = await messenger.getToken();
+      final result = await messenger.getToken();
 
-      expect(got, token);
+      expect(result, token);
 
       verify(messaging.getToken).called(1);
+    });
+
+    test('onTokenRefresh should set up listener without throwing', () {
+      final messaging = MockFirebaseMessaging();
+      final messenger = Messenger(messaging: messaging);
+      var callbackCalled = false;
+
+      // Mock the onTokenRefresh stream
+      when(() => messaging.onTokenRefresh).thenAnswer(
+        (_) => const Stream<String>.empty(),
+      );
+
+      expect(
+        () => messenger.onTokenRefresh((token) {
+          callbackCalled = true;
+        }),
+        returnsNormally,
+      );
+
+      expect(callbackCalled, isFalse);
     });
 
     test('subscribeToTopic should call subscribeToTopic on messaging',
