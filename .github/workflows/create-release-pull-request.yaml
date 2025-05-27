@@ -30,11 +30,11 @@ jobs:
       - name: Set up Dart
         uses: dart-lang/setup-dart@v1
 
-      - name: Install Melos
-        run: dart pub global activate melos
+      - name: Setup Melos
+        uses: bluefireteam/melos-action@v3
 
-      - name: Bootstrap Melos
-        run: melos bootstrap
+      - name: Get dependencies
+        run: flutter pub get
 
       - name: Run `melos version`
         id: get-changed-packages

@@ -1,3 +1,7 @@
+## 1.0.0
+
+ - Update dependencies. with Dart 3.6.0.
+
 ## 0.1.2
 
  - Update a dependency to the latest release.

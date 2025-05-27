@@ -4,19 +4,20 @@ publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: ^3.0.0
+  sdk: ^3.6.0
+
+resolution: workspace
 
 dependencies:
   altfire_tracker:
-    path: ../
   dio: ^5.5.0+1
-  firebase_core: ^3.6.0
+  firebase_core: ^3.13.1
   flutter:
     sdk: flutter
 
 dev_dependencies:
-  altive_lints: ^1.16.0
-  custom_lint: ^0.7.0
+  altive_lints: ^1.20.0
+  custom_lint: ^0.7.5
   firebase_core_platform_interface: ^5.1.0
   flutter_test:
     sdk: flutter

@@ -1,7 +1,7 @@
 name: altfire_authenticator
 description: |
   Provides a wrapper class for FlutterFire Authentication package to simplify its usage.
-version: 0.1.6
+version: 1.0.0
 homepage: https://altive.dev
 repository: https://github.com/altive/altfire
 issue_tracker: https://github.com/altive/altfire/labels/altfire_authenticator
@@ -10,18 +10,20 @@ false_secrets:
   - example/**
 
 environment:
-  sdk: ^3.0.0
+  sdk: ^3.6.0
+
+resolution: workspace
 
 dependencies:
   collection: ^1.18.0
-  firebase_auth: ^5.3.1
-  firebase_core: ^3.6.0
+  firebase_auth: ^5.5.4
+  firebase_core: ^3.13.1
   flutter:
     sdk: flutter
-  google_sign_in: ^6.2.1
+  google_sign_in: ^6.3.0
 
 dev_dependencies:
-  altive_lints: ^1.16.0
-  custom_lint: ^0.7.0
+  altive_lints: ^1.20.0
+  custom_lint: ^0.7.5
   flutter_test:
     sdk: flutter

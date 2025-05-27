@@ -86,8 +86,8 @@ class HomePage extends StatelessWidget {
                         ),
                         body: Center(
                           child: FilledButton(
-                            onPressed: () {
-                              tracker.trackScreenView('/example');
+                            onPressed: () async {
+                              await tracker.trackScreenView('/example');
                             },
                             child: const Text('Send Screen View Event'),
                           ),

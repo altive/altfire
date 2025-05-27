@@ -1,7 +1,28 @@
 name: altfire
 
 environment:
-  sdk: ^3.0.0
+  sdk: ^3.6.0
 
 dev_dependencies:
-  melos: ^6.1.0
+  melos: ^7.0.0-dev.3
+
+workspace:
+  - example
+  - packages/altfire_authenticator
+  - packages/altfire_authenticator/example
+  - packages/altfire_configurator
+  - packages/altfire_configurator/example
+  - packages/altfire_lints
+  - packages/altfire_lints_test
+  - packages/altfire_messenger
+  - packages/altfire_messenger/example
+  - packages/altfire_tracker
+  - packages/altfire_tracker/example
+
+melos:
+  packages:
+    - example
+    - packages/**
+  command:
+    version:
+      workspaceChangelog: false
